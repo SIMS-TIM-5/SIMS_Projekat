@@ -1,33 +1,31 @@
-*** Funkcionalni zahtevi ***
+﻿*** Funkcionalni zahtevi ***
 
-1 Operacije nad korisnikom - Svaki korisnik sistema poseduje svoj nalog koji se sastoji iz korisničkog imena, šifre, pozicije i ličnih podataka. Potrebno je omogućiti dodavanje, brisanje i modifikaciju korisnika.(Korisnik ima pravo da menja samo svoje lične podatke)
+1) Operacije nad korisnikom - Svaki korisnik sistema poseduje svoj nalog koji se sastoji iz korisničkog imena, šifre, pozicije i ličnih podataka. Potrebno je omogućiti dodavanje, brisanje i modifikaciju korisnika.(Korisnik ima pravo da menja samo svoje lične podatke)
 
-2 Operacije nad naplatnom stanicom - Naplatna stanica poseduje svoj serijski broj, mesto i informaciju o aktivnosti. Potrebno je omogućiti dodavanje, brisanje i modifikaciju stanice.
+2) Operacije nad naplatnim mestom - Naplatno mesto poseduje svoj serijski broj, stanicu i informaciju o aktivnosti. Potrebno je omogućiti dodavanje, brisanje i modifikaciju mesta.
 
-3 Operacije nad deonicama - Deonica predstavlja vezu između dva naplatna mesta, potrebno je omogućiti dodavanje i brisanje deonica. (Deonica se može napraviti samo ako su izabrana dva postojeća naplatna mesta).
+3) Operacije nad deonicama - Deonica predstavlja vezu između dve naplatne stanice, potrebno je omogućiti dodavanje i brisanje deonica. (Deonica se može napraviti samo ako su izabrane dve postojeće naplatne stanice).
 
-4 Operacije nad naplatnim mestom - Naplatno mesto sadrži ime, listu naplatnih stanica koje mu pripadaju, listu deonica i cenovnik. Potrebno je omogućiti dodavanje, brisanje i modifikaciju naplatnog mesta.
+4) Operacije nad naplatnom stanicom - Naplatna stanica sadrži ime, listu naplatnih mesta koje mu pripadaju, listu deonica i cenovnik. Potrebno je omogućiti dodavanje, brisanje i modifikaciju naplatnih stanica.
 
-5 Izmena naplate - Potrebno je omogućiti izmenu cenovnika na naplatnim mestima.
+5) Izmena naplate - Potrebno je omogućiti izmenu cenovnika na naplatnim stanicama.
 
-6 Naplata putarine - Naplata putarine podrazumeva unos tipa vozila koje se trenutno opslužuje, deonicu koju je prešao i odabir valute u kojoj će putarina biti plaćena. Nakon uspešnog plaćanja, ukoliko je potrebno, vraća se kusur i podiže se rampa.
+6) Naplata putarine - Naplata putarine podrazumeva unos tipa vozila koje se trenutno opslužuje, deonicu koju je prešao i odabir valute u kojoj će putarina biti plaćena. Nakon uspešnog plaćanja, ukoliko je potrebno, vraća se kusur i podiže se rampa(Ako je naplata izvršena u stranoj valuti, kusur se vraća u dinarima).
 
-7 Generisanje izveštaja - Predstavlja formiranje izveštaja o broju vozila koja su prošla tog dana kroz naplatno mesto i ukupnog naplaćenog iznosa. Izveštaj može biti na dnevnom nivou ili za odabrani preriod. Izveštaje treba grupisati prema valuti kojoj pripadaju.
+7) Generisanje izveštaja - Predstavlja formiranje izveštaja o broju vozila koja su prošla tog dana kroz naplatnu stanicu i ukupnog naplaćenog iznosa. Izveštaj može biti na dnevnom nivou ili za odabrani period. Izveštaje treba grupisati prema valuti kojoj pripadaju.
 
-8 Pregled izveštaja - Potrebno je omogućiti pregled izveštaja kako bismo vršili kontrolu.
+8) Pregled izveštaja - Potrebno je omogućiti pregled izveštaja kako bismo vršili kontrolu.
 
-9 Prijava kvara / evidencija - Ukoliko dođe do bilo kakvog otkaza hardvera na naplatnoj stanici potrebno je omogućiti prijavu kvara. Ako je kvar takav da se rad ne može nastaviti, stanica se zatvara i prijazuke se X spoljašnjem displeju.
+9) Prijava kvara / evidencija - Ukoliko dođe do bilo kakvog otkaza hardvera na naplatnom mestu potrebno je omogućiti prijavu kvara. Ako je kvar takav da se rad ne može nastaviti, mesto se zatvara i prikazuje se X spoljašnjem displeju.
 
-10 Promena aktivnosti naplatne stanice - Ukoliko je kraj smene ili postoji neki kvar, naplatna stanica se može zatvoriti. Ukoliko je stanica zatvorena na spoljašnjem displeju će se prikazati X (u suprotnom stoji +).
+10) Promena aktivnosti naplatnog mesta - Ukoliko je kraj smene ili postoji neki kvar, naplatno mesto se može zatvoriti. Ukoliko je mesto zatvoreno na spoljašnjem displeju će se prikazati X (u suprotnom stoji +).
 
-11 Elektronska naplata - 
+11) Elektronska naplata - Vozilo prolaženjem aktivira ENP antenu koja detektuje tag na vozilu i skida određenu sumu sa računa. Ukoliko je stanje na računu manje od potrebnog, rampa se ne diže.
 
 *** Nefunkcuinalni zahtevi ***
 
-1) Jednostavan korisnički interfejs - korisnički interfejs je poželjno pojednostaviti što je više moguće kako bi operater mogao brzo da obavi naplatu putarine i time ne ometa rad stanice i pravi gužvu.(što manje unosa)
+1) Jednostavan korisnički interfejs za aplikaciju na naplatnom mestu - korisnički interfejs je poželjno pojednostaviti što je više moguće kako bi operater mogao brzo da obavi naplatu putarine i time ne ometa rad stanice i pravi gužvu(što manje unosa).
 
-2) Postojanje različizih korisnika
-	- Administrator - može da obavlja funkcije: 1,2,3,4
-	- Operater - može da obavlja funkcije: 6,9,10
-	- Šef naplatnog mesta - može da obavlja funkcije: 5,6,8(samo za njegovo mesto)
-	- Operater centrale - može da obavlja funkcije: 8
+2) Skladištenje podataka - Podaci se skladište u bazi podataka koja se nalazi u centrali i koja je povezana sa svim naplatnim mestima. Ukoliko dođe do prekida konekcije između mesta i centrale podaci se mogu prenositi nesmetano između centrale i ostalih naplatnih mesta. Naplatno mesto u kom se desila greška lokalno čuva podatke i nakon otklanjanja greške šalje zaostale podatke prema centrali. 
+
+3) Bezbednost centralne baze podataka - šifre se čuvaju na diku u heširanoj formi. 
