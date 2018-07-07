@@ -1,0 +1,38 @@
+package models;
+
+import java.util.ArrayList;
+
+public class NaplatnaStanica {
+	
+	private String idStanice;
+	private String nazivStanice;
+	
+	private ArrayList<Deonica> deonice = new ArrayList<Deonica>();
+	
+	public void dodajRacun() {
+		
+	}
+	
+	public void dodajNaplatnoMesto() {
+		
+	}
+	
+	public void izmeniNaplatnoMesto(NaplatnoMesto mesto) {
+		
+	}
+	
+	public void obrisiNaplatnoMesto(NaplatnoMesto mesto) {
+		
+	}
+	
+	public void dodajDeonicu(NaplatnaStanica susednaStanica) {
+		Deonica d = new Deonica(this, susednaStanica);
+		dodajDeonicuObj(d);
+		susednaStanica.dodajDeonicuObj(d);
+	}
+	
+	public void dodajDeonicuObj(Deonica deonica) {
+		deonice.add(deonica);
+	}
+	
+}

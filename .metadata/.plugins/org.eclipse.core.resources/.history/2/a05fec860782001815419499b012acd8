@@ -1,0 +1,22 @@
+package models;
+
+public class Deonica {
+	private NaplatnaStanica stanica1;
+	private NaplatnaStanica stanica2;
+	
+	private Cenovnik cenovnik;
+	
+	static private int idDeonice = 0;
+	
+	private Deonica() {}
+	
+	public Deonica(NaplatnaStanica s1, NaplatnaStanica s2) {
+		stanica1 = s1;
+		stanica2 = s2;
+	}
+	
+	public void izmeniCenovnik(TipVozila tip, int cena) {
+		
+	}
+	
+}
