@@ -1,0 +1,23 @@
+package models;
+
+public class Rampa {
+	
+	public Rampa() {}
+	
+	void aktivirajMotor(int smer) {
+		
+	}
+	
+	void iskljuciMotor() {
+		
+	}
+	
+	boolean proveraSenzoraZaVisinu() {
+		
+		return false;
+	}
+	
+	void promeniStanje(StanjeRampe stanje) {
+		
+	}
+}

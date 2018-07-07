@@ -1,0 +1,5 @@
+package models.stanja.rampa;
+
+public abstract class StanjeRampe {
+
+}

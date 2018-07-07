@@ -1,0 +1,27 @@
+package models;
+
+import models.stanja.rampa.StanjeRampe;
+
+public class Rampa {
+	
+	public Rampa() {}
+	
+	public void aktivirajMotor(int smer) {
+		
+	}
+	
+	public void iskljuciMotor() {
+		
+	}
+	
+	public boolean proveraSenzoraZaVisinu() {
+		
+		return false;
+	}
+	
+	public void promeniStanje(StanjeRampe stanje) {
+		
+	}
+	
+	private StanjeRampe tekuceStanje;
+}
