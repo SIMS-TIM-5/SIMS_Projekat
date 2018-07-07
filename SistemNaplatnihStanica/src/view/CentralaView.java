@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
 
 import controller.CentralaController;
 import javafx.scene.control.Button;
+import models.Kvar;
 import models.Racun;
 
 public class CentralaView extends JFrame {
@@ -44,14 +45,17 @@ public class CentralaView extends JFrame {
 	private JTabbedPane tabPane;
 
 	public static String colums[] = { "Datum", "Tip", "Id stanice", "Deonica" };
+	public static String colums_kvar[] = {"Datum","ID mesta","Tip kvara","Opis"};
 	private Object rows[][] = {};
 	// private TableModel model;
 	private ArrayList<Racun> listaRacuna;
+	private ArrayList<Kvar> listaKvarova;
 
 	public CentralaView() {
 		super("Sistem naplatnih stanica - Operater centrale");
 
 		listaRacuna = new ArrayList<>();
+		listaKvarova = new ArrayList<>();
 		tableScrollers = new JScrollPane[2];
 		// model = new DefaultTableModel(rows, colums);
 		table = new JTable[2];
@@ -279,6 +283,17 @@ public class CentralaView extends JFrame {
 		String vrednost = datumK.getText();
 		return vrednost;
 	}
+	
+	public String getKvarDatumP(){
+		String vrednost = kvarDatumP.getText();
+		return vrednost;
+	}
+	
+	public String getKvarDatumK(){
+		String vrednost = kvarDatumK.getText();
+		return vrednost;
+	}
+	
 
 	public void setDatumKEmpty() {
 		datumK.setText("");
@@ -297,10 +312,39 @@ public class CentralaView extends JFrame {
 		return vrednost;
 	}
 
+	public String getKvarStanica(){
+		String vrednost = kvarStanica.getText();
+		return vrednost;
+	}
+	
 	public void setBtnPonisti(ActionListener al) {
 		dugmePonisti.addActionListener(al);
 	}
 
+	public void setDugmePonistiKvar(ActionListener al){
+		dugmePonistiKvar.addActionListener(al);
+	}
+	
+	public void setDugmeDatumKvar(ActionListener al){
+		dugmeDatumKvar.addActionListener(al);
+	}
+	
+	public void setDugmeStanicaKvar(ActionListener al){
+		dugmeStanicaKvar.addActionListener(al);
+	}
+	
+	public void setKvarDatumKEmpty(){
+		kvarDatumK.setText("");
+	}
+	
+	public void setKvarDatumPEmpty(){
+		kvarDatumP.setText("");
+	}
+
+	public void setKvarStanicaEmpty(){
+		kvarStanica.setText("");
+	}
+	
 	public void isprazniTabelu(int br) {
 		for (int i = table[br].getRowCount() - 1; i >= 0; i--) {
 			DefaultTableModel model = (DefaultTableModel) table[br].getModel();
@@ -331,6 +375,14 @@ public class CentralaView extends JFrame {
 	public static void main(String[] args) {
 		CentralaView view = new CentralaView();
 		CentralaController controller = new CentralaController(view);
+	}
+
+	public ArrayList<Kvar> getListaKvarova() {
+		return listaKvarova;
+	}
+
+	public void setListaKvarova(ArrayList<Kvar> lista){
+		this.listaKvarova = lista;
 	}
 
 }
