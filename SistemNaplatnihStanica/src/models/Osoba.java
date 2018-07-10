@@ -1,5 +1,9 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public abstract class Osoba {
 
 	protected String ime;
@@ -8,7 +12,7 @@ public abstract class Osoba {
 	protected String mail;
 	protected Mesto mesto;
 	
-	private Osoba() {
+	public Osoba() {
 	}
 
 	public Osoba(String ime, String prezime, String brojTelefona, String mail, Mesto mesto) {
@@ -19,6 +23,12 @@ public abstract class Osoba {
 		this.mesto = mesto;
 	}
 
+	@Override
+	public String toString() {
+		return "Osoba [ime=" + ime + ", prezime=" + prezime + ", brojTelefona=" + brojTelefona + ", mail=" + mail
+				+ ", mesto=" + mesto + "]";
+	}
+	
 	public String getIme() {
 		return ime;
 	}

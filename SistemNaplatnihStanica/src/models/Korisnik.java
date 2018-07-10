@@ -1,10 +1,18 @@
 package models;
 
-public abstract class Korisnik extends Osoba {
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+public class Korisnik extends Osoba {
 
 	protected String korisnickoIme;
 	protected String sifra;
 	protected TipKorisnika tip;
+	
+	public Korisnik() {
+		super();
+	}
 	
 	public Korisnik(String ime, String prezime, String brojTelefona, String mail, Mesto mesto, String korisnickoIme,
 			String sifra, TipKorisnika tip) {
@@ -12,6 +20,11 @@ public abstract class Korisnik extends Osoba {
 		this.korisnickoIme = korisnickoIme;
 		this.sifra = sifra;
 		this.tip = tip;
+	}
+
+	@Override
+	public String toString() {
+		return "Korisnik [korisnickoIme=" + korisnickoIme + ", sifra=" + sifra + ", tip=" + tip + "]";
 	}
 
 	public String getKorisnickoIme() {

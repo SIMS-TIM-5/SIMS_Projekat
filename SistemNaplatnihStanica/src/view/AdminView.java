@@ -4,11 +4,13 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
 import controller.AdminController;
 
@@ -106,9 +108,7 @@ public class AdminView extends JFrame {
 	}
 	
 	public void setDataToTable(int tab, String[] header, Object[][] data) {
-		dataTables[tab] = new JTable(data, header);
-		panels[tab].removeAll();
-		panels[tab].add(dataTables[tab]);
+		dataTables[tab].setModel(new DefaultTableModel(data, header));
 	}
 	
 	// Samo za testiranje
