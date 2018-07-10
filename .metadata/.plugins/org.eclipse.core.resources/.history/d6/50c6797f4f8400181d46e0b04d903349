@@ -1,0 +1,66 @@
+package view;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class RampaPanel extends JPanel {
+	
+	private JLabel cenaLabel;
+	private JLabel cenaValLabel;
+	private JLabel valutaLabel;
+	private JLabel valutaValLabel;
+	private JLabel uplatioLabel;
+	private JLabel kusurLabel;
+	private JLabel kusurValLabel;
+	
+	private JButton btnKvar;
+	private JButton btnRampa;
+	
+	public RampaPanel() {
+		
+		cenaLabel = new JLabel("Cena: ");
+		cenaValLabel = new JLabel("250");
+		valutaLabel = new JLabel("Valuta: ");
+		valutaValLabel = new JLabel("DIN");
+		uplatioLabel = new JLabel("Uplatio: ");
+		kusurLabel = new JLabel("Kusur: ");
+		kusurValLabel = new JLabel("100");
+		
+		btnKvar = new JButton("Kvar");
+		btnKvar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("Kvar");
+			}
+			
+		});
+		
+		btnRampa = new JButton("Rampa");
+		btnRampa.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Rampa");
+			}
+			
+		});
+		
+	}
+	
+	public void layoutSetup() {
+		setLayout(new GridBagLayout());
+		
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		
+	}
+}

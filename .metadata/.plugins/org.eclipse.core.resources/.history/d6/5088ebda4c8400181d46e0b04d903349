@@ -1,0 +1,145 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+
+public class NaplatnoMestoView extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	
+	private DeonicaPanel deonicaPanel;
+	//private RampaPanel rampaPanel;
+	private Toolbar toolbar;
+	
+	private JLabel deonicaLabel;
+	private JLabel cenaLabel;
+	private JLabel cenaValLabel;
+	private JLabel valutaLabel;
+	private JLabel valutaValLabel;
+	private JLabel uplatioLabel;
+	private JLabel kusurLabel;
+	private JLabel kusurValLabel;
+	
+	private JComboBox<String> comboDeonica;
+	
+	private JButton btnKvar;
+	private JButton btnRampa;
+	private JButton btnOdjava;
+	
+	private JRadioButton radioKat1;
+	private JRadioButton radioKat2;
+	private JRadioButton radioKat3;
+	private JRadioButton radioKat4;
+	private JRadioButton radioKat5;
+	private ButtonGroup katGroup;
+	
+	public NaplatnoMestoView() {
+		
+		super("Naplatno mesto");
+		
+		deonicaLabel = new JLabel("Deonica: ");
+		cenaLabel = new JLabel("Cena: ");
+		cenaValLabel = new JLabel("250");
+		valutaLabel = new JLabel("Valuta: ");
+		valutaValLabel = new JLabel("DIN");
+		uplatioLabel = new JLabel("Uplatio: ");
+		kusurLabel = new JLabel("Kusur: ");
+		kusurValLabel = new JLabel("100");
+		
+		comboDeonica = new JComboBox<String>();
+		//TODO inicijalizacija combobox modela na osnovu tekuceg mjesta
+		//DefaultComboBoxModel model = new DefaultComboBoxModel();
+		//for () {
+		//{
+		//comboDeonica.setModel(model);
+		
+		
+		btnKvar = new JButton("Kvar");
+		btnKvar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("Kvar");
+			}
+			
+		});
+		
+		btnRampa = new JButton("Rampa");
+		btnRampa.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Rampa");
+			}
+			
+		});
+		
+		
+		
+		radioKat1 = new JRadioButton("Kat1");
+		radioKat1.setActionCommand("AUTO");
+		radioKat2 = new JRadioButton("Kat2");
+		radioKat2.setActionCommand("LAKO_TERETNO_VOZILO");
+		radioKat3 = new JRadioButton("Kat3");
+		radioKat3.setActionCommand("TESKO_TERETNO_VOZILO");
+		radioKat4 = new JRadioButton("Kat4");
+		radioKat4.setActionCommand("MOTOR");
+		radioKat5 = new JRadioButton("Kat5");
+		radioKat5.setActionCommand("AUTOBUS");
+		katGroup = new ButtonGroup();
+		katGroup.add(radioKat1);
+		katGroup.add(radioKat2);
+		katGroup.add(radioKat3);
+		katGroup.add(radioKat4);
+		katGroup.add(radioKat5);
+		
+		toolbar = new Toolbar();
+		
+		setLayout(new BorderLayout());
+		
+		add(toolbar, BorderLayout.NORTH);
+		
+		
+		setSize(600, 500);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	
+	public void layoutSetup() {
+		setLayout(new GridBagLayout());
+		
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		gc.weightx = 1;
+		gc.weighty = 1;
+		
+		gc.gridx = 0;
+		gc.gridy = 0;
+		gc.insets = new Insets(10, 10, 0, 0);
+		add(deonicaLabel, gc);
+		
+		gc.gridx = 1;
+		gc.gridy = 0;
+		gc.insets = new Insets(10, 0, 0, 0);
+		add(comboDeonica, gc);
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		new NaplatnoMestoView();
+	}
+}
