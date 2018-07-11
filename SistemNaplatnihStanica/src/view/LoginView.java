@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -101,6 +102,11 @@ public class LoginView extends JFrame {
 	
 	public String getPassword() {
 		return passwordField.getText();
+	}
+	
+	public void showDialogWrongLogin() {
+		JOptionPane.showMessageDialog(null, "Uneli ste pogresno korisnicko ime ili lozinku",
+				"Greska", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	// Samo za testiranje view-a

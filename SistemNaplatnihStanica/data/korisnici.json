@@ -1,0 +1,56 @@
+{
+	"korisnici" : [
+		{
+			"korisnickoIme" : "pera",
+			"sifra" : "123",
+			"tip" : "ADMINISTRATOR",
+			"ime": "Pera",
+			"prezime": "Peric",
+			"brojTelefona": "0612345678",
+			"mesto" : {
+				"adresa" : "Bulevar oslobodjenja 1",
+				"nazivMesta" : "Novi Sad",
+				"ptt" : "21000"
+			}
+		},
+		{
+			"korisnickoIme" : "marko",
+			"sifra" : "123",
+			"tip" : "OPERATER_CENTRALE",
+			"ime": "Marko",
+			"prezime": "Markovic",
+			"brojTelefona": "0622355579",
+			"mesto" : {
+				"adresa" : "Bulevar Mihajla Pupina 24",
+				"nazivMesta" : "Novi Sad",
+				"ptt" : "21000"
+			}
+		},
+		{
+			"korisnickoIme" : "filip",
+			"sifra" : "123",
+			"tip" : "OPERATER",
+			"ime": "Filip",
+			"prezime": "Filipovic",
+			"brojTelefona": "0632242628",
+			"mesto" : {
+				"adresa" : "Futoska 24",
+				"nazivMesta" : "Novi Sad",
+				"ptt" : "21000"
+			}
+		},
+		{
+			"korisnickoIme" : "miki",
+			"sifra" : "123",
+			"tip" : "SEF_NAPLATNE_STANICE",
+			"ime": "Mihajlo",
+			"prezime": "Mihajlovski",
+			"brojTelefona": "0652545575",
+			"mesto" : {
+				"adresa" : "Brace Ribnikar 23",
+				"nazivMesta" : "Novi Sad",
+				"ptt" : "21000"
+			}
+		}
+	]
+}
