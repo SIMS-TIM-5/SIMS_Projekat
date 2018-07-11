@@ -1,12 +1,16 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Mesto {
 
 	private String adresa;
 	private String nazivMesta;
 	private int ptt;
 	
-	private Mesto() {
+	public Mesto() {
 	}
 
 	public Mesto(String adresa, String nazivMesta, int ptt) {
@@ -15,6 +19,11 @@ public class Mesto {
 		this.ptt = ptt;
 	}
 	
+	@Override
+	public String toString() {
+		return "Mesto [adresa=" + adresa + ", nazivMesta=" + nazivMesta + ", ptt=" + ptt + "]";
+	}
+
 	public String getAdresa() {
 		return adresa;
 	}

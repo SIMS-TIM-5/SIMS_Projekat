@@ -3,6 +3,12 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
+import models.Korisnik;
+import models.Sistem;
+import models.TipKorisnika;
+import view.AdminView;
 import view.LoginView;
 
 public class LoginController {
@@ -15,19 +21,40 @@ public class LoginController {
 		addLoginBtnListener();
 	}
 	
+	
+	
 	private void addLoginBtnListener() {
 		view.setLoginBtnListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String username = view.getUsername();
 				String password = view.getPassword();
+				boolean pronadjenKorisnik = false;
 				
-				// TODO: proveriti ispravnost username + password
-				// ako je ispravna kombinacija otvoriti odgovarajuci panel
+				for (Korisnik k : Sistem.korisnici) {
+					if (!k.getKorisnickoIme().equals(username) || !k.getSifra().equals(password))
+						continue;
+						
+					if (k.getTip() == TipKorisnika.ADMINISTRATOR) {
+						view.setVisible(false);
+						AdminView view = new AdminView();
+						AdminController controller = new AdminController(view);
+						System.out.println("Prozor za Admina je pokrenut.");
+					} else if (k.getTip() == TipKorisnika.OPERATER_CENTRALE) {
+						// TODO: odavde se pokrece frame za operatera centrale
+						// ne zaboraviti view.setvisible(false)
+						System.out.println("Prozor za Operatera centrale je pokrenut.");
+					} else if (k.getTip() == TipKorisnika.SEF_NAPLATNE_STANICE) {
+						// TODO: odavne se pokrece frame za sefa
+						// ne zaboraviti view.setvisible(false)
+						System.out.println("Prozor za Sefa naplatne stanice je pokrenut");
+					}
+					
+					pronadjenKorisnik = true;
+				}
 				
-				System.out.println("Username: " + username);
-				System.out.println("Password: " + password);
-				System.out.println("Login button activated");
+				if (!pronadjenKorisnik)
+					view.showDialogWrongLogin();
 			}
 		});
 	}
