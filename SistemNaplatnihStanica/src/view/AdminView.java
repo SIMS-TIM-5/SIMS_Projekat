@@ -10,6 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import controller.AdminController;
@@ -89,6 +90,20 @@ public class AdminView extends JFrame {
 		add(tabPane, BorderLayout.CENTER);
 	}
 	
+	public void dodajRedUTabelu(int tab, Object[] red) {
+		DefaultTableModel model = (DefaultTableModel) dataTables[tab].getModel();
+		model.addRow(red);
+	}
+	
+	public void obrisiRed(int tab, int red) {
+		DefaultTableModel model = (DefaultTableModel) dataTables[tab].getModel();
+		model.removeRow(red);
+	}
+	
+	public void clearTableSelection(int tab) {
+		dataTables[tab].clearSelection();
+	}
+	
 	public void setTabChangeListener(ChangeListener cl) {
 		tabPane.addChangeListener(cl);
 	}
@@ -105,8 +120,24 @@ public class AdminView extends JFrame {
 		dataTables[tab].setModel(new DefaultTableModel(data, header));
 	}
 	
+	public void setBtnUnosListener(ActionListener al) {
+		btnUnos.addActionListener(al);
+	}
+	
+	public void setBtnIzmenaListener(ActionListener al) {
+		btnIzmena.addActionListener(al);
+	}
+	
+	public void setBtnBrisanjeListener(ActionListener al) {
+		btnBrisanje.addActionListener(al);
+	}
+	
 	public void setBtnOdjavaListener(ActionListener al) {
 		btnOdjava.addActionListener(al);
+	}
+	
+	public int[] getSelectedRows(int tab) {
+		return dataTables[tab].getSelectedRows();
 	}
 	
 	// Samo za testiranje

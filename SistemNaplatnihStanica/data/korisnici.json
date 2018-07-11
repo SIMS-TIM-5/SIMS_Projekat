@@ -7,6 +7,7 @@
 			"ime": "Pera",
 			"prezime": "Peric",
 			"brojTelefona": "0612345678",
+			"mail" : "pera@gmail.com",
 			"mesto" : {
 				"adresa" : "Bulevar oslobodjenja 1",
 				"nazivMesta" : "Novi Sad",
@@ -20,6 +21,7 @@
 			"ime": "Marko",
 			"prezime": "Markovic",
 			"brojTelefona": "0622355579",
+			"mail" : "marko@gmail.com",
 			"mesto" : {
 				"adresa" : "Bulevar Mihajla Pupina 24",
 				"nazivMesta" : "Novi Sad",
@@ -33,6 +35,7 @@
 			"ime": "Filip",
 			"prezime": "Filipovic",
 			"brojTelefona": "0632242628",
+			"mail" : "filip@gmail.com",
 			"mesto" : {
 				"adresa" : "Futoska 24",
 				"nazivMesta" : "Novi Sad",
@@ -46,6 +49,7 @@
 			"ime": "Mihajlo",
 			"prezime": "Mihajlovski",
 			"brojTelefona": "0652545575",
+			"mail" : "miki@gmail.com",
 			"mesto" : {
 				"adresa" : "Brace Ribnikar 23",
 				"nazivMesta" : "Novi Sad",

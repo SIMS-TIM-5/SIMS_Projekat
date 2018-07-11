@@ -1,11 +1,11 @@
-- dijagrami sekvence
-- dijagrami aktivnosti
++ dijagrami sekvence
++ dijagrami aktivnosti
 - modelovati MVC ?
 
-- panel za operatera
++ panel za operatera
 - panel za admina
 	- trenutno korisnik moze da menja vrednosti u tabeli, to treba zabraniti
-	- dodati model u AdminController
+	+ dodati model u AdminController
 	- napraviti sve dijaloge
 		- dodati akcije za unos/izmena/brisanje/odjava
 
