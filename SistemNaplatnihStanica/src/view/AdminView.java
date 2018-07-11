@@ -1,11 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
@@ -13,6 +13,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
 import controller.AdminController;
+import models.Sistem;
 
 public class AdminView extends JFrame {
 
@@ -23,8 +24,8 @@ public class AdminView extends JFrame {
 	
 	private JTabbedPane tabPane;
 	
-	private JPanel[] panels;
 	private JTable[] dataTables;
+	private JScrollPane[] tableScrollers;
 	
 	private JButton btnUnos, btnBrisanje, btnIzmena;
 	private JButton btnOdjava;
@@ -41,9 +42,8 @@ public class AdminView extends JFrame {
 		setResizable(true);
 		
 		dataTables = new JTable[NUM_TABS];
-		panels = new JPanel[NUM_TABS];
+		tableScrollers = new JScrollPane[NUM_TABS];
 		
-		createPanels();
 		createButtons();
 		initDataTables();
 		
@@ -51,12 +51,6 @@ public class AdminView extends JFrame {
 		initTabs();
 		
 		setVisible(true);
-	}
-	
-	private void createPanels() {
-		for (int i = 0; i < panels.length; ++i) {
-			panels[i] = new JPanel();
-		}
 	}
 	
 	private void createButtons() {
@@ -80,17 +74,17 @@ public class AdminView extends JFrame {
 	private void initDataTables() {
 		for (int i = 0; i < dataTables.length; ++i) {
 			dataTables[i] = new JTable();
-			panels[i].add(dataTables[i]);
+			tableScrollers[i] = new JScrollPane(dataTables[i]);
 		}
 	}
 	
 	private void initTabs() {
 		tabPane = new JTabbedPane();
 		
-		tabPane.addTab("Korisnici", panels[0]);
-		tabPane.addTab("Nap.stanice", panels[1]);
-		tabPane.addTab("Nap.mesta", panels[2]);
-		tabPane.addTab("Deonice", panels[3]);
+		tabPane.addTab("Korisnici", tableScrollers[0]);
+		tabPane.addTab("Nap.stanice", tableScrollers[1]);
+		tabPane.addTab("Nap.mesta", tableScrollers[2]);
+		tabPane.addTab("Deonice", tableScrollers[3]);
 		
 		add(tabPane, BorderLayout.CENTER);
 	}
@@ -111,8 +105,13 @@ public class AdminView extends JFrame {
 		dataTables[tab].setModel(new DefaultTableModel(data, header));
 	}
 	
+	public void setBtnOdjavaListener(ActionListener al) {
+		btnOdjava.addActionListener(al);
+	}
+	
 	// Samo za testiranje
 	public static void main(String[] args) {
+		Sistem sistem = Sistem.getInstance();
 		AdminView view = new AdminView();
 		AdminController controller = new AdminController(view);
 	}
