@@ -1,0 +1,45 @@
+{
+	"stanice" :
+	[
+		{
+			"id" : 1,
+			"naziv" : "Beograd",
+			"idSusednih" :
+			[
+				2,
+				3,
+				4
+			]
+		},
+		{
+			"id" : 2,
+			"naziv" : "Sid",
+			"idSusednih" :
+			[
+				1,
+				3,
+				4
+			]
+		},
+		{
+			"id" : 3,
+			"naziv" : "Ruma",
+			"idSusednih" :
+			[
+				1,
+				2,
+				4
+			]
+		},
+		{
+			"id" : 4,
+			"naziv" : "Novi Sad",
+			"idSusednih" :
+			[
+				1,
+				2,
+				3
+			]
+		}
+	]
+}

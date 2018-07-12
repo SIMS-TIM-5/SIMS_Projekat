@@ -1,0 +1,72 @@
+package utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import models.Korisnik;
+import models.NaplatnaStanica;
+import utils.JSONReader.ListaKorisnika;
+
+public class JSONReaderStanice {
+
+	public static ArrayList<NaplatnaStanica> procitajStanice(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaPodataka metadata = null;
+		
+		try {
+			metadata = mapper.readValue(new File(path), ListaPodataka.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaPodataka {
+		private ArrayList<MetadataStanice> listaPodataka;
+		
+		public ListaPodataka() {
+			
+		}
+
+		public ArrayList<MetadataStanice> getListaPodataka() {
+			return listaPodataka;
+		}
+	}
+
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class MetadataStanice {
+		private int id;
+		private String naziv;
+		private String operater;
+		private ArrayList<Integer> idSusednih;
+		
+		public MetadataStanice() {
+			
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public String getNaziv() {
+			return naziv;
+		}
+
+		public String getOperater() {
+			return operater;
+		}
+
+		public ArrayList<Integer> getIdSusednih() {
+			return idSusednih;
+		}
+
+		
+	}
+}

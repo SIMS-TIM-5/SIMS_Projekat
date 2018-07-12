@@ -26,4 +26,14 @@ public class Deonica {
 	public int getId() {
 		return idDeonice;
 	}
+
+	public NaplatnaStanica getStanica1() {
+		return stanica1;
+	}
+
+	public NaplatnaStanica getStanica2() {
+		return stanica2;
+	}
+	
+	
 }

@@ -1,0 +1,89 @@
+{
+	"listaPodataka" :
+	[
+		{
+			"id" : 1,
+			"naziv" : "Beograd",
+			"sef" : "miki",
+			"susedneStanice" :
+			[
+				{
+					"idSusedne":2,
+					"cenaDeonice":300
+				},
+				{
+					"idSusedne":3,
+					"cenaDeonice":250
+				},
+				{
+					"idSusedne":4,
+					"cenaDeonice":250
+				}
+				
+			]
+		},
+		{
+			"id" : 2,
+			"naziv" : "Sid",
+			"sef" : "miki",
+			"susedneStanice" :
+			[
+				{
+					"idSusedne":1,
+					"cenaDeonice":300
+				},
+				{
+					"idSusedne":3,
+					"cenaDeonice":250
+				},
+				{
+					"idSusedne":4,
+					"cenaDeonice":400
+				}
+				
+			]
+		},
+		{
+			"id" : 3,
+			"naziv" : "Ruma",
+			"sef" : "miki",
+			"susedneStanice" :
+			[
+				{
+					"idSusedne":1,
+					"cenaDeonice":250
+				},
+				{
+					"idSusedne":2,
+					"cenaDeonice":250
+				},
+				{
+					"idSusedne":4,
+					"cenaDeonice":350
+				}
+				
+			]
+		},
+		{
+			"id" : 4,
+			"naziv" : "Novi Sad",
+			"sef" : "miki",
+			"susedneStanice" :
+			[
+				{
+					"idSusedne":1,
+					"cenaDeonice":250
+				},
+				{
+					"idSusedne":2,
+					"cenaDeonice":400
+				},
+				{
+					"idSusedne":3,
+					"cenaDeonice":350
+				}
+				
+			]
+		}
+	]
+}

@@ -1,0 +1,89 @@
+package utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import models.NaplatnaStanica;
+import models.Sistem;
+
+public class JSONReaderStanice {
+
+	public static ArrayList<NaplatnaStanica> procitajStanice(String path, Sistem sistem) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaPodataka lista = null;
+		ArrayList<NaplatnaStanica> stanice = new ArrayList<NaplatnaStanica>();
+		
+		try {
+			lista = mapper.readValue(new File(path), ListaPodataka.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		for (MetadataStanice meta : lista.getListaPodataka()) {
+			
+		}
+		
+		return null;
+	}
+	
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaPodataka {
+		private ArrayList<MetadataStanice> listaPodataka;
+		
+		public ListaPodataka() {
+			
+		}
+
+		public ArrayList<MetadataStanice> getListaPodataka() {
+			return listaPodataka;
+		}
+
+		@Override
+		public String toString() {
+			return "ListaPodataka [listaPodataka=" + listaPodataka + "]";
+		}
+		
+		
+	}
+
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class MetadataStanice {
+		private int id;
+		private String naziv;
+		private String sef;
+		private ArrayList<Integer> idSusednih;
+		
+		public MetadataStanice() {
+			
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public String getNaziv() {
+			return naziv;
+		}
+
+		public String getSef() {
+			return sef;
+		}
+
+		public ArrayList<Integer> getIdSusednih() {
+			return idSusednih;
+		}
+
+		@Override
+		public String toString() {
+			return "MetadataStanice [id=" + id + ", naziv=" + naziv + ", sef=" + sef + ", idSusednih="
+					+ idSusednih + "]";
+		}
+
+		
+	}
+}

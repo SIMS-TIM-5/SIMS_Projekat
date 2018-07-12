@@ -1,0 +1,46 @@
+package utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import models.Korisnik;
+import models.NaplatnaStanica;
+import utils.JSONReader.ListaKorisnika;
+
+public class JSONReaderStanice {
+	/**
+	 * Cita korisnike iz fajla cija putanja se prosledi kao parametar.
+	 */
+	public static ArrayList<NaplatnaStanica> procitajStanice(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaStanica listaStanica = null;
+		
+		try {
+			listaStanica = mapper.readValue(new File(path), ListaStanica.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return listaStanica.getStanice();
+	}
+
+	/**
+	 * Pomocna klasa za citanje JSON fajla sa korisnicima
+	 */
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaStanica {
+		private ArrayList<NaplatnaStanica> stanice;
+		
+		public ListaStanica() {
+		}
+
+		public ArrayList<NaplatnaStanica> getStanice() {
+			return stanice;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"stanice" :
+	[
+		{
+			"ID" : 1,
+			"Naziv" : "Beograd"
+		},
+		{
+			"ID" : 2,
+			"Naziv" : "Sid"
+		},
+		{
+			"ID" : 3,
+			"Naziv" : "Ruma"
+		}
+	]
+}
