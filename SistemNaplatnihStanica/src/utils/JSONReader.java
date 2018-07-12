@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Korisnik;
+import models.RegularnoMesto;
 
 public class JSONReader {
 
@@ -27,6 +28,22 @@ public class JSONReader {
 		
 		return lk.getKorisnici();
 	}
+	
+	/**
+	 * Cita regularna mesta iz json fajla.
+	 */
+	public static ArrayList<RegularnoMesto> procitajRegularnaMesta(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaNaplatnihMesta lnp = null;
+		
+		try {
+			lnp = mapper.readValue(new File(path), ListaNaplatnihMesta.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return lnp.getNaplatnaMesta();
+	}
 
 	/**
 	 * Pomocna klasa za citanje JSON fajla sa korisnicima
@@ -40,6 +57,18 @@ public class JSONReader {
 
 		public ArrayList<Korisnik> getKorisnici() {
 			return korisnici;
+		}
+	}
+	
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaNaplatnihMesta {
+		private ArrayList<RegularnoMesto> naplatnaMesta;
+		
+		public ListaNaplatnihMesta() {
+		}
+
+		public ArrayList<RegularnoMesto> getNaplatnaMesta() {
+			return naplatnaMesta;
 		}
 	}
 }
