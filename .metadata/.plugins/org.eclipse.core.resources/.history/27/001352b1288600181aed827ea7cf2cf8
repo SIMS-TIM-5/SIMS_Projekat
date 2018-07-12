@@ -66,5 +66,6 @@ public class Sistem {
 			return;
 		
 		naplatnaMesta.remove(index);
+>>>>>>> c93ceda5afeeddd51423373a68138de945a0a53a
 	}
 }

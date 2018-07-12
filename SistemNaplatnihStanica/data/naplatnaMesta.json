@@ -1,0 +1,29 @@
+{
+	"naplatnaMesta" : [
+		{
+			"aktivnost" : "true",
+			"id" : "0",
+			"idStanice" : "0"
+		},
+		{
+			"aktivnost" : "true",
+			"id" : "1",
+			"idStanice" : "0"
+		},
+		{
+			"aktivnost" : "true",
+			"id" : "2",
+			"idStanice" : "1"
+		},
+		{
+			"aktivnost" : "true",
+			"id" : "3",
+			"idStanice" : "1"
+		},
+		{
+			"aktivnost" : "true",
+			"id" : "4",
+			"idStanice" : "2"
+		}
+	]
+}

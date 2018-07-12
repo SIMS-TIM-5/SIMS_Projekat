@@ -10,8 +10,11 @@ public class Sistem {
 	private static Sistem instance;
 	
 	public static ArrayList<Korisnik> korisnici;
+<<<<<<< HEAD
 	public static ArrayList<NaplatnaStanica> stanice;
+=======
 	public static ArrayList<RegularnoMesto> naplatnaMesta;
+>>>>>>> c93ceda5afeeddd51423373a68138de945a0a53a
 	
 	public static Sistem getInstance() {
 		if (instance == null) {
@@ -66,5 +69,6 @@ public class Sistem {
 			return;
 		
 		naplatnaMesta.remove(index);
+>>>>>>> c93ceda5afeeddd51423373a68138de945a0a53a
 	}
 }
