@@ -20,7 +20,13 @@ public class NaplatnaStanica {
 		naplatnaMesta = new ArrayList<NaplatnoMesto>();
 	}
 	
-	
+	public NaplatnaStanica(int id, String naziv, Korisnik sef) {
+		this();
+		
+		this.idStanice = id;
+		this.nazivStanice = naziv;
+		this.sefStanice = sef;
+	}
 	
 	public void dodajRacun() {
 		
@@ -109,5 +115,11 @@ public class NaplatnaStanica {
 	}
 	
 	
+	public int brojNaplatnihMesta() {
+		return naplatnaMesta.size();
+	}
 	
+	public ArrayList<NaplatnoMesto> naplatnaMesta() {
+		return naplatnaMesta;
+	}
 }

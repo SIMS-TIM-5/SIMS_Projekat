@@ -67,6 +67,59 @@ public class Sistem {
 		if (index >= naplatnaMesta.size())
 			return;
 		
+		RegularnoMesto rm = naplatnaMesta.get(index);
+		NaplatnaStanica st = nadjiStanicu(rm.getIdStanice());
+		
+		st.obrisiNaplatnoMesto(rm);
+		
 		naplatnaMesta.remove(index);
+	}
+	
+	public static void dodajStanicu(NaplatnaStanica ns) {
+		if (ns == null || stanice.contains(ns))
+			return;
+		
+		stanice.add(ns);
+	}
+	
+	public static void obrisiNaplatnuStanicu(int index) {
+		if (index >= stanice.size())
+			return;
+		
+		NaplatnaStanica ns = stanice.get(index);
+		ArrayList<NaplatnoMesto> mesta = ns.naplatnaMesta();
+		ArrayList<Integer> zaBrisanje = new ArrayList<Integer>();
+		
+		for (NaplatnoMesto m : mesta) {
+			for (int i = 0; i < naplatnaMesta.size(); ++i) {
+				if (naplatnaMesta.get(i).getId().equals(m.getId())) {
+					zaBrisanje.add(i);
+				}
+			}
+		}
+		
+		for (int i = zaBrisanje.size() - 1; i >= 0; --i) {
+			naplatnaMesta.remove(zaBrisanje.get(i).intValue());
+		}
+
+		stanice.remove(index);
+	}
+	
+	public static NaplatnaStanica nadjiStanicu(int id) {
+		for (int i = 0; i < stanice.size(); ++i) {
+			if (stanice.get(i).getIdStanice() == id) 
+				return stanice.get(i);
+		}
+		
+		return null;
+	}
+	
+	public static Korisnik nadjiKorisnika(String korIme) {
+		for (int i = 0; i < korisnici.size(); ++i) {
+			if (korisnici.get(i).getKorisnickoIme().equals(korIme))
+				return korisnici.get(i);
+		}
+		
+		return null;
 	}
 }

@@ -12,9 +12,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
 import models.Korisnik;
 import models.Mesto;
+import models.NaplatnaStanica;
 import models.RegularnoMesto;
 import models.Sistem;
 import models.TipKorisnika;
@@ -24,6 +26,7 @@ import view.AdminView;
 public class AdminController {
 
 	private static String[] korisniciHeader;
+	private static String[] napStaniceHeader;
 	private static String[] napMestaHeader;
 	
 	private AdminView view;
@@ -33,8 +36,8 @@ public class AdminController {
 		
 		korisniciHeader = new String[] {"Username", "Tip", "Ime", "Prezime",
 									"Broj telefona", "Adresa", "Mesto"};
-		
-		napMestaHeader = new String[] {"Aktivnost", "ID", "ID naplatne stanice"};
+		napStaniceHeader = new String[] {"ID stanice", "Naziv stanice", "Sef stanice", "Broj nap.mesta"};
+		napMestaHeader = new String[] {"Aktivnost", "ID", "ID naplatne stanice", "Naziv stanice"};
 		
 		initTabelaKorisnici(0);
 		initTabelaNaplatneStanice(1);
@@ -98,7 +101,6 @@ public class AdminController {
 			}
 		});
 	}
-	
 	
 	private void addBtnBrisanjeListener() {
 		view.setBtnBrisanjeListener(new ActionListener() {
@@ -171,25 +173,38 @@ public class AdminController {
 	
 	private void dodajNaplatnuStanicu() {
 		JTextField fieldNazivStanice = new JTextField();
+		JTextField fieldSefStanice = new JTextField();
+		JTable tableSusedneStanice = new JTable();
+		JScrollPane scroller = new JScrollPane(tableSusedneStanice);
 		
-		// mozda da se tabela prebaci na izmenu !?
-		JTable tableNapMesta = new JTable();
-		JScrollPane scroller = new JScrollPane(tableNapMesta);
-		//Object[][] data = parsirajListuNaplatnihmesta(Sistem.naplatnaMesta);
-		//tableNapMesta.setModel(new DefaultTableMode(napMestaHeader, data));
+		Object[][] data = parsirajListuNaplatnihStanica(Sistem.stanice);
+		tableSusedneStanice.setModel(new DefaultTableModel(data, napStaniceHeader));
 		
 		Object[] message = {
 				"Naziv stanice: ", fieldNazivStanice,
-				"Naplatna mesta", scroller
+				"Korisnicko ime sefa", fieldSefStanice,
+				"Susedne stanice", scroller
 		};
 		
 		int option = JOptionPane.showConfirmDialog(null, message, "Dodavanje naplatne stanice",
 													JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION) {
-			// new Naplatna stanica
-			// int[] selektovano = tableNapMesta.getselectedrows
-			// sistem.dodajstanicu
-			// json.upisistanice
+			Korisnik sef = null;
+			for (int i = 0; i < Sistem.korisnici.size(); ++i) {
+				if (Sistem.korisnici.get(i).getKorisnickoIme().equals(fieldSefStanice.getText()))
+					sef = Sistem.korisnici.get(i);
+			}
+			
+			NaplatnaStanica ns = new NaplatnaStanica(Sistem.stanice.size() + 1, fieldNazivStanice.getText(), sef);
+			
+			int[] selektovaneStanice = tableSusedneStanice.getSelectedRows();
+
+			for (int i = 0; i < selektovaneStanice.length; ++i) {
+				ns.dodajDeonicu(Sistem.stanice.get(selektovaneStanice[i]));
+			}
+			
+			Sistem.dodajStanicu(ns);
+			JSONWriter.upisiNaplatneStanice();
 		}
 	}
 	
@@ -197,8 +212,8 @@ public class AdminController {
 		JTable tableNapStanice = new JTable();
 		JScrollPane scroller = new JScrollPane(tableNapStanice);
 		
-		//Object[][] data = parsirajListuNaplatnihStanica(Sistem.naplatneStanice);
-		//tableNapStanice.setModel(new DefaultTableModel(napStaniceHeader, data));
+		Object[][] data = parsirajListuNaplatnihStanica(Sistem.stanice);
+		tableNapStanice.setModel(new DefaultTableModel(data, napStaniceHeader));
 		
 		Object[] message = {
 				"Naplatne stanice", scroller
@@ -207,12 +222,13 @@ public class AdminController {
 		int option = JOptionPane.showConfirmDialog(null, message, "Dodavanje naplatnog mesta",
 													JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION) {
-			// new naplatno mesto
-			// int stanica = tableNapMesta.getselectedrow
-			// update naplatna stanica - dodaj mu novo nap. mesto
-			// sistem.dodajmesto
-			// json.upismesta
-			// json.upisstanica
+			int index = tableNapStanice.getSelectedRow();
+			NaplatnaStanica ns = Sistem.stanice.get(index);
+			RegularnoMesto rm = new RegularnoMesto(true, String.valueOf(Sistem.naplatnaMesta.size() + 1), ns.getIdStanice());
+			Sistem.dodajNaplatnoMesto(rm);
+			ns.dodajNaplatnoMesto(rm);
+			JSONWriter.upisiNaplatnaMesta();
+			JSONWriter.upisiNaplatneStanice();
 		}
 	}
 	
@@ -266,18 +282,25 @@ public class AdminController {
 					"Greska", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-
-		// NaplatnaStanica np = Sistem.naplatneStanice.get(selectedRows[0]);
-		//JTextField fieldNazivStanice = new JTextField(np.getNazivStanice());
-
+		
+		
+		NaplatnaStanica np = Sistem.stanice.get(selectedRows[0]);
+		
+		JTextField fieldNazivStanice = new JTextField(np.getNazivStanice());
+		JTextField fieldSef = new JTextField(np.getSefStanice().getKorisnickoIme());
+		
 		Object[] message = {
-//				"Naziv stanice:", fieldNazivStanice
+				"Naziv stanice:", fieldNazivStanice,
+				"Sef stanice:", fieldSef
 		};
 		
 		int option = JOptionPane.showConfirmDialog(null, message, "Izmena naplatne stanice", JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION) {
-			// izmena
-			// upis u fajl
+			Korisnik k = Sistem.nadjiKorisnika(fieldSef.getText());
+			np.setNazivStanice(fieldNazivStanice.getText());
+			np.setSefStanice(k);
+			
+			JSONWriter.upisiNaplatneStanice();
 		}
 	}
 	
@@ -293,6 +316,8 @@ public class AdminController {
 			break;
 			
 		case 1: // Tabela naplatne stanice
+			Sistem.obrisiNaplatnuStanicu(indexZaBrisanje);
+			JSONWriter.upisiNaplatneStanice();
 			break;
 			
 		case 2: // Tabela naplatna mesta
@@ -301,6 +326,7 @@ public class AdminController {
 			break;
 			
 		case 3: // Deonica
+			// TODO
 			break;
 		}
 	}
@@ -334,6 +360,29 @@ public class AdminController {
 		return podaci;
 	}
 	
+	private Object[][] parsirajListuNaplatnihStanica(ArrayList<NaplatnaStanica> ns) {
+		ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+		
+		for (NaplatnaStanica s : ns) {
+			ArrayList<String> podaci = new ArrayList<String>();
+			//{"ID stanice", "Naziv stanice", "Sef stanice", "Broj nap.mesta
+			podaci.add(String.valueOf(s.getIdStanice()));
+			podaci.add(s.getNazivStanice());
+			podaci.add(s.getSefStanice().getIme() + " " + s.getSefStanice().getIme());
+			podaci.add(String.valueOf(s.brojNaplatnihMesta()));
+			
+			data.add(podaci);
+		}
+		
+		Object[][] podaci = new Object[data.size()][];
+		for (int i = 0; i < data.size(); ++i) {
+			ArrayList<String> row = data.get(i);
+			podaci[i] = row.toArray(new Object[row.size()]);
+		}
+		
+		return podaci;
+	}
+	
 	private Object[][] parsirajListuNaplatnihMesta(ArrayList<RegularnoMesto> rm) {
 		ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
 		
@@ -342,6 +391,7 @@ public class AdminController {
 			podaci.add(String.valueOf(r.isAktivnost()));
 			podaci.add(r.getId());
 			podaci.add(String.valueOf(r.getIdStanice()));
+			podaci.add(Sistem.nadjiStanicu(r.getIdStanice()).getNazivStanice());
 			
 			data.add(podaci);
 		}
@@ -361,7 +411,8 @@ public class AdminController {
 	}
 	
 	private void initTabelaNaplatneStanice(int tab) {
-		// TODO
+		Object[][] data = parsirajListuNaplatnihStanica(Sistem.stanice);
+		view.setDataToTable(tab, napStaniceHeader, data);
 	}
 	
 	private void initTabelaNaplatnaMesta(int tab) {
@@ -392,13 +443,6 @@ public class AdminController {
 					// koje ce parsirati objekte u odgovarajuci format za JTable
 				case 1: // Tabela naplatnih stanica
 					initTabelaNaplatneStanice(1);
-					
-					header = new String[] {"id", "grad", "br. mesta"};
-					data = new Object[][] {
-						{"1", "ns", "3"},
-						{"3", "bg", "2"}
-					};
-					view.setDataToTable(view.getSelectedTab(), header, data);
 					break;
 					
 				case 2: // Tabela naplatnih mesta
