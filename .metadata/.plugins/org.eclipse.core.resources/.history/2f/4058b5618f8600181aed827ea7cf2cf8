@@ -29,7 +29,6 @@ public class JSONReaderStanice {
 			NaplatnaStanica stanica = new NaplatnaStanica();
 			stanica.setIdStanice(meta.getId());
 			stanica.setNazivStanice(meta.getNaziv());
-			
 			for (Korisnik k : sistem.korisnici) {
 				if (k.getKorisnickoIme().equals(meta.getSef())) {
 					stanica.setSefStanice(k);

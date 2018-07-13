@@ -26,8 +26,8 @@ public class NaplatnaStanica {
 		
 	}
 	
-	public void dodajNaplatnoMesto(NaplatnoMesto nm) {
-		naplatnaMesta.add(nm);
+	public void dodajNaplatnoMesto() {
+		
 	}
 	
 	public void izmeniNaplatnoMesto(NaplatnoMesto mesto) {

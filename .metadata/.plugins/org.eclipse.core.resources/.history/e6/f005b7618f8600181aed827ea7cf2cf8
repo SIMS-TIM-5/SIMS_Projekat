@@ -24,8 +24,6 @@ public class Sistem {
 		korisnici = JSONReader.procitajKorisnike("data/korisnici.json");
 		stanice = JSONReaderStanice.procitajStanice("data/stanice.json", this);
 		naplatnaMesta = JSONReader.procitajRegularnaMesta("data/naplatnaMesta.json", this);
-		
-		System.out.println(stanice);
 	}
 	
 	public static void dodajKorisnika(Korisnik k) {

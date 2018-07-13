@@ -48,7 +48,6 @@ public class JSONReader {
 			for (NaplatnaStanica ns : sistem.stanice) {
 				if (rm.getIdStanice() == ns.getIdStanice()) {
 					ns.dodajNaplatnoMesto(rm);
-					break;
 				}
 			}
 		}

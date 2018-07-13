@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Korisnik;
-import models.NaplatnaStanica;
 import models.RegularnoMesto;
-import models.Sistem;
 
 public class JSONReader {
 
@@ -34,7 +32,7 @@ public class JSONReader {
 	/**
 	 * Cita regularna mesta iz json fajla.
 	 */
-	public static ArrayList<RegularnoMesto> procitajRegularnaMesta(String path, Sistem sistem) {
+	public static ArrayList<RegularnoMesto> procitajRegularnaMesta(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		ListaNaplatnihMesta lnp = null;
 		
@@ -42,15 +40,6 @@ public class JSONReader {
 			lnp = mapper.readValue(new File(path), ListaNaplatnihMesta.class);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		for (RegularnoMesto rm : lnp.getNaplatnaMesta()) {
-			for (NaplatnaStanica ns : sistem.stanice) {
-				if (rm.getIdStanice() == ns.getIdStanice()) {
-					ns.dodajNaplatnoMesto(rm);
-					break;
-				}
-			}
 		}
 		
 		return lnp.getNaplatnaMesta();
