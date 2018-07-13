@@ -25,7 +25,6 @@ public class Sistem {
 		stanice = JSONReaderStanice.procitajStanice("data/stanice.json", this);
 		naplatnaMesta = JSONReader.procitajRegularnaMesta("data/naplatnaMesta.json", this);
 		
-		System.out.println(stanice);
 	}
 	
 	public static void dodajKorisnika(Korisnik k) {

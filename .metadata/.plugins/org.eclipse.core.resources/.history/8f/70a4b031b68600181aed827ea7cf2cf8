@@ -1,0 +1,32 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import view.OperaterLoginView;
+
+public class LoginOperaterController {
+
+	private OperaterLoginView view;
+	
+	public LoginOperaterController(OperaterLoginView view) {
+		this.view = view;
+		
+		setLoginListener();
+	}
+	
+	private void setLoginListener() {
+		view.setButtonListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String user = view.getUsername();
+				String pass = view.getPassword();
+				String mestoString = view.getMesto();
+				
+				System.out.println(user + " " + pass + " " + mestoString);
+			}
+			
+		});
+	}
+}

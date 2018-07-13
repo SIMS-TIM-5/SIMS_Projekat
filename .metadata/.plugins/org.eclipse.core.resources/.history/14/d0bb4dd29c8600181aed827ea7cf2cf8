@@ -1,0 +1,14 @@
+package main;
+
+import models.Sistem;
+
+public class OperaterProgram {
+	
+	public static void main(String[] args) {
+		Sistem sistem = Sistem.getInstance();
+		
+		
+		
+	}
+	
+}

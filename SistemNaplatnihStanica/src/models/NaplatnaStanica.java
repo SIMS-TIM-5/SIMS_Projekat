@@ -39,14 +39,14 @@ public class NaplatnaStanica {
 	}
 	
 	//metoda koja se poziva pri kreiranju deonice u toj stanici
-	public void dodajDeonicu(NaplatnaStanica susednaStanica) {
+	public void dodajDeonicu(NaplatnaStanica susednaStanica, int cena) {
 		for (Deonica d : deonice) {
 			if ((d.getStanica1() == this && d.getStanica2() == susednaStanica) || 
 					(d.getStanica2() == this && d.getStanica1() == susednaStanica)) {
 				return;
 			}
 		}
-		Deonica d = new Deonica(this, susednaStanica);
+		Deonica d = new Deonica(this, susednaStanica, cena);
 		dodajDeonicuObj(d);
 		susednaStanica.dodajDeonicuObj(d);
 	}
@@ -98,6 +98,16 @@ public class NaplatnaStanica {
 
 	public void setSefStanice(Korisnik sefStanice) {
 		this.sefStanice = sefStanice;
+	}
+	
+	public ArrayList<Deonica> getDeonice() {
+		return deonice;
+	}
+
+
+
+	public ArrayList<NaplatnoMesto> getNaplatnaMesta() {
+		return naplatnaMesta;
 	}
 
 

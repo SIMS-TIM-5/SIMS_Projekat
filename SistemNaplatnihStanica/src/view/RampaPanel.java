@@ -40,10 +40,10 @@ public class RampaPanel extends JPanel {
 		setBorder(BorderFactory.createTitledBorder("Info o rampi"));
 		
 		cenaLabel = new JLabel("Cena: ");
-		cenaValLabel = new JLabel("250");
+		cenaValLabel = new JLabel("");
 		uplatioLabel = new JLabel("Uplatio: ");
 		kusurLabel = new JLabel("Kusur: ");
-		kusurValLabel = new JLabel("100");
+		kusurValLabel = new JLabel("");
 		
 		
 		uplatioField = new JTextField(10);
@@ -151,5 +151,9 @@ public class RampaPanel extends JPanel {
 		gc.gridwidth = 2;
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(btnKvar, gc);
+	}
+	
+	public JLabel getCenaLabel() {
+		return cenaValLabel;
 	}
 }

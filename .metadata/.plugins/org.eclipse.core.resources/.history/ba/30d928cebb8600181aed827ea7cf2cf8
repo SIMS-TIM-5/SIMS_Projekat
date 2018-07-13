@@ -1,0 +1,21 @@
+package controller;
+
+import models.Korisnik;
+import models.NaplatnaStanica;
+import models.NaplatnoMesto;
+import view.NaplatnoMestoView;
+
+public class MestoController {
+	
+	private NaplatnoMestoView view;
+	private Korisnik operater;
+	private NaplatnaStanica stanica;
+	private NaplatnoMesto mesto;
+	
+	public MestoController(NaplatnoMestoView view, Korisnik operater, NaplatnaStanica stanica, NaplatnoMesto mesto) {
+		this.view = view;
+		this.operater = operater;
+		this.stanica = stanica;
+		this.mesto = mesto;
+	}
+}

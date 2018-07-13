@@ -1,0 +1,12 @@
+package controller;
+
+import view.NaplatnoMestoView;
+
+public class MestoController {
+	
+	private NaplatnoMestoView view;
+	
+	public MestoController(NaplatnoMestoView view) {
+		this.view = view;
+	}
+}

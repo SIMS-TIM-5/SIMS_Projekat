@@ -48,13 +48,9 @@ public class JSONReaderStanice {
 						susednaStanica = np;
 					}
 				}
-				stanica.dodajDeonicu(susednaStanica);
+				stanica.dodajDeonicu(susednaStanica, ss.cenaDeonice);
 			}
 			i++;
-		}
-		
-		for (NaplatnaStanica ns : stanice) {
-			System.out.println(ns);
 		}
 		
 		return stanice;

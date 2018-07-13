@@ -1,0 +1,8 @@
+package controller;
+
+import view.NaplatnoMestoView;
+
+public class MestoController {
+	
+	private NaplatnoMestoView view;
+}

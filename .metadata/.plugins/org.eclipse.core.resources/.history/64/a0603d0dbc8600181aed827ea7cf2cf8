@@ -1,0 +1,46 @@
+package view;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+public class NaplatnoMestoView extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	
+	private DeonicaPanel deonicaPanel;
+	private RampaPanel rampaPanel;
+	private Toolbar toolbar;
+
+	public NaplatnoMestoView() {
+		
+		super("Naplatno mesto");
+		
+		toolbar = new Toolbar();
+		deonicaPanel = new DeonicaPanel();
+		rampaPanel = new RampaPanel();
+		
+		setLayout(new BorderLayout());
+		
+		add(toolbar, BorderLayout.NORTH);
+		add(deonicaPanel, BorderLayout.WEST);
+		add(rampaPanel, BorderLayout.CENTER);
+		
+		setSize(460, 430);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	
+	public Toolbar getToolbar() {
+		return toolbar;
+	}
+	
+	public RampaPanel getRampaPanel() {
+		return rampaPanel;
+	}
+	
+	public DeonicaPanel getDeonicaPanel() {
+		return deonicaPanel;
+	}
+}
