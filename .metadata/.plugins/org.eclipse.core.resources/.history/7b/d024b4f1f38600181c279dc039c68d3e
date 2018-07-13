@@ -57,18 +57,6 @@ public class NaplatnaStanica {
 		susednaStanica.dodajDeonicuObj(d);
 	}
 	
-	public void dodajDeonicu(NaplatnaStanica susednaStanica) {
-		for (Deonica d : deonice) {
-			if ((d.getStanica1() == this && d.getStanica2() == susednaStanica) || 
-					(d.getStanica2() == this && d.getStanica1() == susednaStanica)) {
-				return;
-			}
-		}
-		Deonica d = new Deonica(this, susednaStanica);
-		dodajDeonicuObj(d);
-		susednaStanica.dodajDeonicuObj(d);
-	}
-	
 	//metoda za sigurno dodavanje u listu deonica
 	public void dodajDeonicuObj(Deonica deonica) {
 		deonice.add(deonica);

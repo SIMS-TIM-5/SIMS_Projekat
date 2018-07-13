@@ -24,19 +24,6 @@ public class Deonica {
 		izmeniCenovnik(TipVozila.TESKO_TERETNO_VOZILO, cena+1200);
 	}
 	
-	public Deonica(NaplatnaStanica s1, NaplatnaStanica s2) {
-		idDeonice = ++id;
-		stanica1 = s1;
-		stanica2 = s2;
-		cenovnik = new Cenovnik();
-		int cena = 200;
-		izmeniCenovnik(TipVozila.MOTOR, cena);
-		izmeniCenovnik(TipVozila.AUTO, cena+200);
-		izmeniCenovnik(TipVozila.LAKO_TERETNO_VOZILO, cena+300);
-		izmeniCenovnik(TipVozila.AUTOBUS, cena+700);
-		izmeniCenovnik(TipVozila.TESKO_TERETNO_VOZILO, cena+1200);
-	}
-	
 	public void izmeniCenovnik(TipVozila tip, int cena) {
 		cenovnik.cene.put(tip, cena);
 	}

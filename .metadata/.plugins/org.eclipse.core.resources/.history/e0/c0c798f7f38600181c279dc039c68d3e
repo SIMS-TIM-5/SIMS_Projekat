@@ -64,7 +64,7 @@ public class NaplatnaStanica {
 				return;
 			}
 		}
-		Deonica d = new Deonica(this, susednaStanica);
+		Deonica d = new Deonica(this, susednaStanica, cena);
 		dodajDeonicuObj(d);
 		susednaStanica.dodajDeonicuObj(d);
 	}
