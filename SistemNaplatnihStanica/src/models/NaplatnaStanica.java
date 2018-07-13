@@ -122,4 +122,8 @@ public class NaplatnaStanica {
 	public ArrayList<NaplatnoMesto> naplatnaMesta() {
 		return naplatnaMesta;
 	}
+	
+	public ArrayList<Deonica> deonice() {
+		return deonice;
+	}
 }

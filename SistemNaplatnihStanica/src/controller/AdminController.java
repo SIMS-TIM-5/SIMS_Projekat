@@ -14,6 +14,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
+import models.Deonica;
 import models.Korisnik;
 import models.Mesto;
 import models.NaplatnaStanica;
@@ -28,6 +29,7 @@ public class AdminController {
 	private static String[] korisniciHeader;
 	private static String[] napStaniceHeader;
 	private static String[] napMestaHeader;
+	private static String[] deoniceHeader;
 	
 	private AdminView view;
 	
@@ -38,6 +40,7 @@ public class AdminController {
 									"Broj telefona", "Adresa", "Mesto"};
 		napStaniceHeader = new String[] {"ID stanice", "Naziv stanice", "Sef stanice", "Broj nap.mesta"};
 		napMestaHeader = new String[] {"Aktivnost", "ID", "ID naplatne stanice", "Naziv stanice"};
+		deoniceHeader = new String[] {"ID", "ID stanice 1", "Stanica 1", "ID stanice 2", "Stanica 2"};
 		
 		initTabelaKorisnici(0);
 		initTabelaNaplatneStanice(1);
@@ -405,6 +408,32 @@ public class AdminController {
 		return podaci;
 	}
 	
+	private Object[][] parsirajListuDeonica(ArrayList<NaplatnaStanica> ns) {
+		ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+		
+		for (NaplatnaStanica n : ns) {
+			ArrayList<String> podaci = new ArrayList<String>();
+			
+			for (Deonica d : n.deonice()) {
+				podaci.add(String.valueOf(d.getId()));
+				podaci.add(String.valueOf(d.getStanica1().getIdStanice()));
+				podaci.add(d.getStanica1().getNazivStanice());
+				podaci.add(String.valueOf(d.getStanica2().getIdStanice()));
+				podaci.add(d.getStanica2().getNazivStanice());
+			}
+			
+			data.add(podaci);
+		}
+		
+		Object[][] podaci = new Object[data.size()][];
+		for (int i = 0; i < data.size(); ++i) {
+			ArrayList<String> row = data.get(i);
+			podaci[i] = row.toArray(new Object[row.size()]);
+		}
+		
+		return podaci;
+	}
+	
 	private void initTabelaKorisnici(int tab) {
 		Object[][] data = parsirajListuKorisnika(Sistem.korisnici);
 		view.setDataToTable(tab, korisniciHeader, data);
@@ -421,7 +450,8 @@ public class AdminController {
 	}
 	
 	private void initTabelaDeonice(int tab) {
-		// TODO
+		Object[][] data = parsirajListuDeonica(Sistem.stanice);
+		view.setDataToTable(tab, deoniceHeader, data);
 	}
 	
 	// Kada se promeni tab procitati sve objekte i ubaciti ih u tabelu (== refresh)
@@ -439,8 +469,6 @@ public class AdminController {
 					initTabelaKorisnici(0);
 					break;
 					
-					// TODO: ovo su samo test podaci, zameniti kasnije sa pravim metodama
-					// koje ce parsirati objekte u odgovarajuci format za JTable
 				case 1: // Tabela naplatnih stanica
 					initTabelaNaplatneStanice(1);
 					break;
@@ -453,14 +481,6 @@ public class AdminController {
 				case 3: // Tabela deonica
 					initTabelaDeonice(3);
 					view.btnIzmeniEnable(false);
-
-					header = new String[] {"id", "pocetak", "kraj"};
-					data = new Object[][] {
-						{"1", "kg", "ns"},
-						{"2", "kr", "bg"},
-						{"3", "bg", "ni"}
-					};
-					view.setDataToTable(view.getSelectedTab(), header, data);
 					break;
 				}
 			}
