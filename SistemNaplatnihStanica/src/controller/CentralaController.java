@@ -26,7 +26,7 @@ public class CentralaController {
 		addBtnStanicaListener();
 		addBtnPonistiListener();
 		napuniListu();
-		initTabele();
+		initTabeleRacuni();
 		view.setRadioListener(new RadioListener() {
 
 			@Override
@@ -55,7 +55,7 @@ public class CentralaController {
 				}
 
 				primeniDatum(datumP, datumK);
-				initTabele();
+				initTabeleRacuni();
 
 				System.out.println(view.getDatumP());
 				System.out.println(view.getDatumK());
@@ -72,7 +72,7 @@ public class CentralaController {
 				System.out.println("Stanica dugme");
 				System.out.println("Ocitao sam : " + view.getStanica());
 				primeniStanicu(Integer.parseInt(view.getStanica()));
-				initTabele();
+				initTabeleRacuni();
 				System.out.println(view.getListaRacuna().size());
 
 			}
@@ -86,13 +86,13 @@ public class CentralaController {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println("Poinisti");
-				view.isprazniTabelu();
+				view.isprazniTabelu(0);
 				view.setStanicaEmpty();
 				view.setDatumKEmpty();
 				view.setDatumPEmpty();
 				view.ponistiRadioBtn();
 				napuniListu();
-				initTabele();
+				initTabeleRacuni();
 				System.out.println(view.getListaRacuna().size());
 			}
 		});
@@ -162,9 +162,9 @@ public class CentralaController {
 		
 	}
 	
-	private void initTabele(){
+	private void initTabeleRacuni(){
 		Object[][] data = parsirajListuRacuna(view.getListaRacuna());
-		view.ubaciUTabelu(view.colums, data);
+		view.ubaciUTabelu(0,view.colums, data);
 	}
 	
 	

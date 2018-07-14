@@ -301,9 +301,9 @@ public class CentralaView extends JFrame {
 		dugmePonisti.addActionListener(al);
 	}
 
-	public void isprazniTabelu() {
-		for (int i = table[0].getRowCount() - 1; i >= 0; i--) {
-			DefaultTableModel model = (DefaultTableModel) table[0].getModel();
+	public void isprazniTabelu(int br) {
+		for (int i = table[br].getRowCount() - 1; i >= 0; i--) {
+			DefaultTableModel model = (DefaultTableModel) table[br].getModel();
 			model.removeRow(i);
 		}
 	}
@@ -324,8 +324,8 @@ public class CentralaView extends JFrame {
 		grupa.clearSelection();
 	}
 
-	public void ubaciUTabelu(String[] kolone, Object[][] redovi) {
-		table[0].setModel(new DefaultTableModel(redovi, kolone));
+	public void ubaciUTabelu(int br,String[] kolone, Object[][] redovi) {
+		table[br].setModel(new DefaultTableModel(redovi, kolone));
 	}
 
 	public static void main(String[] args) {
