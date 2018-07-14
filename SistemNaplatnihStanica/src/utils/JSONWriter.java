@@ -23,8 +23,7 @@ public class JSONWriter {
 		map.put("korisnici", Sistem.korisnici);	
 		
 		try {
-			// TODO: promeni putanju do pravog fajla sa korisnicima !!!
-			mapper.writeValue(new File("data/novi_korisnici.json"), map);
+			mapper.writeValue(new File("data/korisnici.json"), map);
 		} catch (IOException e) {
 			System.out.println("Greska prilikom upisa korisnika u JSON fajl.");
 			e.printStackTrace();
@@ -38,8 +37,7 @@ public class JSONWriter {
 		map.put("naplatnaMesta", Sistem.naplatnaMesta);	
 		
 		try {
-			// TODO: promeni putanju do pravog fajla sa nap.mestima !!!
-			mapper.writeValue(new File("data/nova_naplatna_mesta.json"), map);
+			mapper.writeValue(new File("data/naplatnaMesta.json"), map);
 		} catch (IOException e) {
 			System.out.println("Greska prilikom upisa naplatnih mesta u JSON fajl.");
 			e.printStackTrace();
@@ -53,8 +51,7 @@ public class JSONWriter {
 		map.put("listaPodataka", Sistem.stanice);	
 		
 		try {
-			// TODO: promeni putanju do pravog fajla sa nap.mestima !!!
-			mapper.writeValue(new File("data/nove_naplatne_stanice.json"), map);
+			mapper.writeValue(new File("data/stanice.json"), map);
 		} catch (IOException e) {
 			System.out.println("Greska prilikom upisa naplatnih stanica u JSON fajl.");
 			e.printStackTrace();
@@ -76,7 +73,6 @@ public class JSONWriter {
 		map.put("racuni", sviRacuni);	
 		
 		try {
-			// TODO: promeni putanju do pravog fajla sa nap.mestima !!!
 			mapper.writeValue(new File("data/svi_racuni.json"), map);
 		} catch (IOException e) {
 			System.out.println("Greska prilikom upisa racuna u JSON fajl.");

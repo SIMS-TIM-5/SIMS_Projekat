@@ -346,6 +346,7 @@ public class AdminController {
 		case 1: // Tabela naplatne stanice
 			Sistem.obrisiNaplatnuStanicu(indexZaBrisanje);
 			JSONWriter.upisiNaplatneStanice();
+			JSONWriter.upisiNaplatnaMesta();
 			break;
 			
 		case 2: // Tabela naplatna mesta

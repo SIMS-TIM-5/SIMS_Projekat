@@ -50,4 +50,23 @@ public class Korisnik extends Osoba {
 	public void setTip(TipKorisnika tip) {
 		this.tip = tip;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		Korisnik other = (Korisnik) obj;
+		if (korisnickoIme == null) {
+			if (other.korisnickoIme != null)
+				return false;
+		} else if (!korisnickoIme.equals(other.korisnickoIme))
+			return false;
+		
+		return true;
+	}
 }

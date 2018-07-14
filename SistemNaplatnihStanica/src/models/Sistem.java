@@ -28,25 +28,28 @@ public class Sistem {
 		JSONReaderRacuni.procitajRacune("data/svi_racuni.json", this);
 	}
 	
-	public static void dodajKorisnika(Korisnik k) {
+	public static boolean dodajKorisnika(Korisnik k) {
 		if (k == null || korisnici.contains(k))
-	        return;
+	        return false;
 		
 	    korisnici.add(k);
+	    return true;
 	}
 	
-	public static void obrisiKorisnika(Korisnik k) {
+	public static boolean obrisiKorisnika(Korisnik k) {
 		if (k == null || !korisnici.contains(k))
-			return;
+			return false;
 		
 		korisnici.remove(k);
+		return true;
 	}
 	
-	public static void obrisiKorisnika(int index) {
+	public static boolean obrisiKorisnika(int index) {
 		if (index >= korisnici.size())
-			return;
+			return false;
 		
 		korisnici.remove(index);
+		return true;
 	}
 	
 	public static void dodajNaplatnoMesto(RegularnoMesto r) {

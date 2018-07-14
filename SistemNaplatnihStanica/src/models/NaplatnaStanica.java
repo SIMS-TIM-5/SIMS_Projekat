@@ -48,6 +48,8 @@ public class NaplatnaStanica {
 	
 	//metoda koja se poziva pri kreiranju deonice u toj stanici
 	public void dodajDeonicu(NaplatnaStanica susednaStanica, int cena) {
+		if (susednaStanica == null) return;
+		
 		for (Deonica d : deonice) {
 			if ((d.getStanica1() == this && d.getStanica2() == susednaStanica) || 
 					(d.getStanica2() == this && d.getStanica1() == susednaStanica)) {
@@ -89,7 +91,7 @@ public class NaplatnaStanica {
 	}
 
 
-	@JsonProperty("ID")
+	@JsonProperty("id")
 	public int getIdStanice() {
 		return idStanice;
 	}
@@ -101,7 +103,7 @@ public class NaplatnaStanica {
 	}
 
 
-	@JsonProperty("Naziv")
+	@JsonProperty("naziv")
 	public String getNazivStanice() {
 		return nazivStanice;
 	}
@@ -113,12 +115,14 @@ public class NaplatnaStanica {
 	}
 
 
-
+	@JsonIgnore
 	public Korisnik getSefStanice() {
 		return sefStanice;
 	}
 
-
+	public String getSef() {
+		return sefStanice.getKorisnickoIme();
+	}
 
 	public void setSefStanice(Korisnik sefStanice) {
 		this.sefStanice = sefStanice;
@@ -131,6 +135,7 @@ public class NaplatnaStanica {
 
 	
 
+	@JsonIgnore
 	public ArrayList<NaplatnoMesto> getNaplatnaMesta() {
 		return naplatnaMesta;
 	}
