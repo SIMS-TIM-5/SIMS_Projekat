@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Deonica {
 	
 	private NaplatnaStanica stanica1;
@@ -41,14 +43,17 @@ public class Deonica {
 		cenovnik.cene.put(tip, cena);
 	}
 	
+	@JsonIgnore
 	public int getId() {
 		return idDeonice;
 	}
 
+	@JsonIgnore
 	public NaplatnaStanica getStanica1() {
 		return stanica1;
 	}
 
+	@JsonIgnore
 	public NaplatnaStanica getStanica2() {
 		return stanica2;
 	}
@@ -56,5 +61,12 @@ public class Deonica {
 	public int procitajCenovnik(TipVozila tip) {
 		return cenovnik.cene.get(tip);
 	}
+
+	public int getIdSusedne() {
+		return stanica1.getIdStanice();
+	}
 	
+	public int getCenaDeonice() {
+		return cenovnik.cene.get(TipVozila.MOTOR);
+	}
 }

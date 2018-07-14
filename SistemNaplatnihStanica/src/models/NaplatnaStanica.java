@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NaplatnaStanica {
@@ -123,11 +124,12 @@ public class NaplatnaStanica {
 		this.sefStanice = sefStanice;
 	}
 	
+	@JsonIgnore
 	public ArrayList<Deonica> getDeonice() {
 		return deonice;
 	}
 
-
+	
 
 	public ArrayList<NaplatnoMesto> getNaplatnaMesta() {
 		return naplatnaMesta;
@@ -146,6 +148,10 @@ public class NaplatnaStanica {
 		return naplatnaMesta.size();
 	}
 	
+	public ArrayList<Deonica> getSusedneStanice() {
+		return deonice;
+	}
+	
 	public ArrayList<NaplatnoMesto> naplatnaMesta() {
 		return naplatnaMesta;
 	}
@@ -154,6 +160,7 @@ public class NaplatnaStanica {
 		return deonice;
 	}
 	
+	@JsonIgnore
 	public ArrayList<Racun>  getRacuni() {
 		return racuni;
 	}
