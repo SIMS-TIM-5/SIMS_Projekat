@@ -76,11 +76,15 @@ public class NaplatnaStanica {
 	}
 	
 	public void obrisiDeonicu(int idDeonice) {
+		int index = 0;
+		
 		for (Deonica d : deonice) {
 			if (d.getId() == idDeonice) {
-				deonice.remove(d);
+				break;
 			}
+			index++;
 		}
+		deonice.remove(index);
 	}
 
 

@@ -84,7 +84,6 @@ public class AdminController {
 		});
 	}
 	
-	
 	private void addBtnIzmenaListener() {
 		// Naplatno mesto i deonica ne mogu da se menjaju
 		view.setBtnIzmenaListener(new ActionListener() {
@@ -236,7 +235,33 @@ public class AdminController {
 	}
 	
 	private void dodajDeonicu() {
-		// TODO
+		JTable tableNapStanice1 = new JTable();
+		JScrollPane scroller1 = new JScrollPane(tableNapStanice1);
+		Object[][] data1 = parsirajListuNaplatnihStanica(Sistem.stanice);
+		tableNapStanice1.setModel(new DefaultTableModel(data1, napStaniceHeader));
+	
+		JTextField fieldCena = new JTextField();
+		
+		Object[] message = {
+				"Stanice", scroller1,
+				"Osnovna cena", fieldCena
+		};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Dodavanje naplatnog mesta",
+													JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			int prvaStanica = tableNapStanice1.getSelectedRows()[0];
+			NaplatnaStanica ns1 = Sistem.stanice.get(prvaStanica);
+
+			int drugaStanica = tableNapStanice1.getSelectedRows()[1];
+			NaplatnaStanica ns2 = Sistem.stanice.get(drugaStanica);
+			
+			Deonica d = new Deonica(ns1, ns2, Integer.parseInt(fieldCena.getText()));
+			ns1.dodajDeonicu(ns2);
+			
+			JSONWriter.upisiNaplatneStanice();
+		}
 	}
 	
 	/**
@@ -329,7 +354,8 @@ public class AdminController {
 			break;
 			
 		case 3: // Deonica
-			// TODO
+			Sistem.obrisiDeonicu(indexZaBrisanje);
+			JSONWriter.upisiNaplatneStanice();
 			break;
 		}
 	}
@@ -451,6 +477,7 @@ public class AdminController {
 	
 	private void initTabelaDeonice(int tab) {
 		Object[][] data = parsirajListuDeonica(Sistem.stanice);
+		System.out.println(data.length);
 		view.setDataToTable(tab, deoniceHeader, data);
 	}
 	

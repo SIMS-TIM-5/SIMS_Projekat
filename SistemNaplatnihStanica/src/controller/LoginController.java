@@ -9,6 +9,7 @@ import models.Korisnik;
 import models.Sistem;
 import models.TipKorisnika;
 import view.AdminView;
+import view.CentralaView;
 import view.LoginView;
 
 public class LoginController {
@@ -20,8 +21,6 @@ public class LoginController {
 		
 		addLoginBtnListener();
 	}
-	
-	
 	
 	private void addLoginBtnListener() {
 		view.setLoginBtnListener(new ActionListener() {
@@ -37,12 +36,13 @@ public class LoginController {
 						
 					if (k.getTip() == TipKorisnika.ADMINISTRATOR) {
 						view.setVisible(false);
-						AdminView view = new AdminView();
-						AdminController controller = new AdminController(view);
+						AdminView adminView = new AdminView();
+						AdminController controller = new AdminController(adminView);
 						System.out.println("Prozor za Admina je pokrenut.");
 					} else if (k.getTip() == TipKorisnika.OPERATER_CENTRALE) {
-						// TODO: odavde se pokrece frame za operatera centrale
-						// ne zaboraviti view.setvisible(false)
+						view.setVisible(false);
+						CentralaView centralaView = new CentralaView();
+						CentralaController controller = new CentralaController(centralaView);
 						System.out.println("Prozor za Operatera centrale je pokrenut.");
 					} else if (k.getTip() == TipKorisnika.SEF_NAPLATNE_STANICE) {
 						// TODO: odavne se pokrece frame za sefa

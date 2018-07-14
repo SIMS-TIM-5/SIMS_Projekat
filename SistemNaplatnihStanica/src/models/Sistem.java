@@ -122,4 +122,23 @@ public class Sistem {
 		
 		return null;
 	}
+	
+	public static void obrisiDeonicu(int indexZaBrisanje) {
+		int i = 0;
+		
+		for (NaplatnaStanica ns : stanice) {
+			int idDeonice = 0;
+			
+			for (Deonica d : ns.deonice()) {
+				if (i == indexZaBrisanje) {
+					idDeonice = d.getId();
+					break;
+				}
+				
+				++i;
+			}
+			
+			ns.obrisiDeonicu(idDeonice);
+		}
+	}
 }
