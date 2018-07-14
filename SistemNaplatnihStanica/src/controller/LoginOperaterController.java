@@ -42,6 +42,7 @@ public class LoginOperaterController {
 				
 				if (operater == null) {
 					view.showWrongUserDialog();
+					return;
 				}
 				
 				String[] tokens = mestoString.split(" : ");

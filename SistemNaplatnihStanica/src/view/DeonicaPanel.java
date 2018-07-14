@@ -18,6 +18,7 @@ import javax.swing.JRadioButton;
 
 import models.Deonica;
 import models.NaplatnaStanica;
+import models.TipVozila;
 
 public class DeonicaPanel extends JPanel {
 	
@@ -192,5 +193,13 @@ public class DeonicaPanel extends JPanel {
 	
 	public void setDeonicaListener(DeonicaListener deonicaListener) {
 		this.deonicaListener = deonicaListener;
+	}
+	
+	public TipVozila getKategorija() {
+		return TipVozila.valueOf(katGroup.getSelection().getActionCommand());
+	}
+	
+	public String getDeonica() {
+		return (String)comboDeonica.getSelectedItem();
 	}
 }

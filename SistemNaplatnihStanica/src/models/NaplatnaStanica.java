@@ -12,12 +12,13 @@ public class NaplatnaStanica {
 	
 	private ArrayList<Deonica> deonice;
 	private ArrayList<NaplatnoMesto> naplatnaMesta;
-	
+	private ArrayList<Racun> racuni;
 	
 	
 	public NaplatnaStanica() {
 		deonice = new ArrayList<Deonica>();
 		naplatnaMesta = new ArrayList<NaplatnoMesto>();
+		racuni = new ArrayList<Racun>();
 	}
 	
 	public NaplatnaStanica(int id, String naziv, Korisnik sef) {
@@ -28,8 +29,8 @@ public class NaplatnaStanica {
 		this.sefStanice = sef;
 	}
 	
-	public void dodajRacun() {
-		
+	public void dodajRacun(Racun r) {
+		racuni.add(r);
 	}
 	
 	public void dodajNaplatnoMesto(NaplatnoMesto nm) {
@@ -147,5 +148,9 @@ public class NaplatnaStanica {
 	
 	public ArrayList<Deonica> deonice() {
 		return deonice;
+	}
+	
+	public ArrayList<Racun>  getRacuni() {
+		return racuni;
 	}
 }

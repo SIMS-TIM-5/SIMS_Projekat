@@ -1,15 +1,22 @@
 package controller;
 
+import java.util.Date;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import models.Deonica;
 import models.Korisnik;
 import models.NaplatnaStanica;
 import models.NaplatnoMesto;
+import models.Racun;
 import models.Sistem;
 import models.TipVozila;
+import utils.JSONWriter;
 import view.DeonicaListener;
+import view.DolazakEvent;
 import view.NaplatnoMestoView;
+import view.RampaListener;
 
 public class MestoController {
 	
@@ -28,6 +35,7 @@ public class MestoController {
 		this.view = view;
 		
 		setDeonicaListener();
+		setRampaListener();
 	}
 	
 	public void setDeonicaListener() {
@@ -35,7 +43,6 @@ public class MestoController {
 
 			@Override
 			public void deonicaListenerOccured(String deonica, String kategorija) {
-				System.out.println(deonica + " " + kategorija);
 				JLabel cenaLabel = view.getRampaPanel().getCenaLabel();
 				int cena = 0;
 				Deonica d = null;
@@ -53,6 +60,49 @@ public class MestoController {
 					}
 				}
 				cenaLabel.setText(Integer.toString(cena));
+			}
+			
+		});
+	}
+	
+	public void setRampaListener() {
+		view.getRampaPanel().setRampaListener(new RampaListener(){
+
+			@Override
+			public void rampaListenerOccured(DolazakEvent event) {
+				int stvarnoUplatio = event.getUplatio();
+				if (event.getValuta().equals("EUR")) {
+					stvarnoUplatio *= 118;
+				}
+				if (stvarnoUplatio < event.getIznos()) {
+					JOptionPane.showMessageDialog(null, "Dat iznos nije dovoljan. Zakljucavam rampu.",
+							"Rampa", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int kusur = stvarnoUplatio - event.getIznos();
+				view.getRampaPanel().setKusur(String.valueOf(kusur));
+				view.getRampaPanel().resetField();
+				
+				TipVozila tip = view.getDeonicaPanel().getKategorija();
+				String nazivDolazeceStanice = view.getDeonicaPanel().getDeonica();
+				Deonica deonica = null;
+				for (Deonica de : stanica.getDeonice()) {
+					if (de.getStanica1() == stanica) {
+						if (de.getStanica2().getNazivStanice().equals(nazivDolazeceStanice)) {
+							deonica = de;
+							break;
+						}
+					} else {
+						if (de.getStanica1().getNazivStanice().equals(nazivDolazeceStanice)) {
+							deonica = de;
+							break;
+						}
+					}
+				}
+				
+				Racun r = new Racun(tip, deonica.getId(), mesto.getId(), new Date(), stanica.getIdStanice());
+				stanica.dodajRacun(r);
+				JSONWriter.upisiRacune();
 			}
 			
 		});

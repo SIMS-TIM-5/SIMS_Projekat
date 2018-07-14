@@ -34,6 +34,8 @@ public class RampaPanel extends JPanel {
 	private JRadioButton eurValuta;
 	private ButtonGroup valutaGroup;
 	
+	private RampaListener rampaListener;
+	
 	
 	public RampaPanel() {
 		
@@ -66,15 +68,26 @@ public class RampaPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Rampa");
+				String cena;
+				if ((cena = cenaValLabel.getText()).equals("")) {
+					return;
+				}
+				String valuta = valutaGroup.getSelection().getActionCommand();
+				String uplatio;
+				if ((uplatio = uplatioField.getText()).equals("")) {
+					return;
+				}
+				DolazakEvent event = new DolazakEvent(this, Integer.valueOf(cena), valuta, Integer.valueOf(uplatio));
+				rampaListener.rampaListenerOccured(event);
 			}
 			
 		});
 		
 		dinValuta = new JRadioButton("DIN");
+		dinValuta.setActionCommand("DIN");
 		dinValuta.setSelected(true);
 		eurValuta = new JRadioButton("EUR");
+		eurValuta.setActionCommand("EUR");
 		valutaGroup = new ButtonGroup();
 		valutaGroup.add(dinValuta);
 		valutaGroup.add(eurValuta);
@@ -155,5 +168,17 @@ public class RampaPanel extends JPanel {
 	
 	public JLabel getCenaLabel() {
 		return cenaValLabel;
+	}
+	
+	public void setRampaListener(RampaListener rampaListener) {
+		this.rampaListener = rampaListener;
+	}
+	
+	public void setKusur(String kusur) {
+		this.kusurValLabel.setText(kusur);
+	}
+	
+	public void resetField() {
+		this.uplatioField.setText("");
 	}
 }

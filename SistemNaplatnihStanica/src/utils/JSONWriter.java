@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Korisnik;
 import models.NaplatnaStanica;
+import models.Racun;
 import models.RegularnoMesto;
 import models.Sistem;
 
@@ -56,6 +57,29 @@ public class JSONWriter {
 			mapper.writeValue(new File("data/nove_naplatne_stanice.json"), map);
 		} catch (IOException e) {
 			System.out.println("Greska prilikom upisa naplatnih stanica u JSON fajl.");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void upisiRacune() { 
+		ObjectMapper mapper = new ObjectMapper();
+		
+		ArrayList<Racun> sviRacuni = new ArrayList<Racun>();
+		
+		for (NaplatnaStanica ns : Sistem.stanice) {
+			for (Racun r : ns.getRacuni()) {
+				sviRacuni.add(r);
+			}
+		}
+		
+		Map<String, ArrayList<Racun>> map = new HashMap<String, ArrayList<Racun>>();
+		map.put("racuni", sviRacuni);	
+		
+		try {
+			// TODO: promeni putanju do pravog fajla sa nap.mestima !!!
+			mapper.writeValue(new File("data/svi_racuni.json"), map);
+		} catch (IOException e) {
+			System.out.println("Greska prilikom upisa racuna u JSON fajl.");
 			e.printStackTrace();
 		}
 	}

@@ -1,0 +1,41 @@
+package models;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+public class Racun {
+	
+	private TipVozila tipVozila;
+	private Deonica deonica;
+	private int idNaplatnogMesta;
+	private Date datumProlaska;
+	
+	public Racun(TipVozila tipVozila, Deonica deonica, int idNaplatnogMesta, Date datumProlaska) {
+		super();
+		this.tipVozila = tipVozila;
+		this.deonica = deonica;
+		this.idNaplatnogMesta = idNaplatnogMesta;
+		this.datumProlaska = datumProlaska;
+	}
+
+	public TipVozila getTipVozila() {
+		return tipVozila;
+	}
+
+	public Deonica getDeonica() {
+		return deonica;
+	}
+
+	public int getIdNaplatnogMesta() {
+		return idNaplatnogMesta;
+	}
+
+	public Date getDatumProlaska() {
+		return datumProlaska;
+	}
+	
+	
+}

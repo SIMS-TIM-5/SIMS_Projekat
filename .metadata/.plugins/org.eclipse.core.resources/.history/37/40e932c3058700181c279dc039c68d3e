@@ -1,0 +1,30 @@
+package view;
+
+import java.util.EventObject;
+
+public class DolazakEvent extends EventObject {
+
+	private static final long serialVersionUID = 1L;
+	
+	private String iznos;
+	private String valuta;
+	
+	public DolazakEvent(Object source) {
+		super(source);
+	}
+	
+	public DolazakEvent(Object source, String iznos, String valuta) {
+		super(source);
+		this.iznos = iznos;
+		this.valuta = valuta;
+	}
+
+	public String getIznos() {
+		return iznos;
+	}
+
+	public String getValuta() {
+		return valuta;
+	}
+
+}

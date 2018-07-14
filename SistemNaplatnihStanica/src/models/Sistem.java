@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 
 import utils.JSONReader;
+import utils.JSONReaderRacuni;
 import utils.JSONReaderStanice;
 
 public class Sistem {
@@ -24,7 +25,7 @@ public class Sistem {
 		korisnici = JSONReader.procitajKorisnike("data/korisnici.json");
 		stanice = JSONReaderStanice.procitajStanice("data/stanice.json", this);
 		naplatnaMesta = JSONReader.procitajRegularnaMesta("data/naplatnaMesta.json", this);
-		
+		JSONReaderRacuni.procitajRacune("data/svi_racuni.json", this);
 	}
 	
 	public static void dodajKorisnika(Korisnik k) {
