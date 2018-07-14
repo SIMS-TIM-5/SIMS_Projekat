@@ -92,6 +92,7 @@ public class CentralaController {
 				view.setDatumPEmpty();
 				view.ponistiRadioBtn();
 				napuniListu();
+				initTabele();
 				System.out.println(view.getListaRacuna().size());
 			}
 		});
