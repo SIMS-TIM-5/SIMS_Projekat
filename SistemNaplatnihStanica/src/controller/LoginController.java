@@ -41,12 +41,15 @@ public class LoginController {
 						System.out.println("Prozor za Admina je pokrenut.");
 					} else if (k.getTip() == TipKorisnika.OPERATER_CENTRALE) {
 						view.setVisible(false);
-						CentralaView centralaView = new CentralaView();
+						CentralaView centralaView = new CentralaView(k);
 						CentralaController controller = new CentralaController(centralaView);
 						System.out.println("Prozor za Operatera centrale je pokrenut.");
 					} else if (k.getTip() == TipKorisnika.SEF_NAPLATNE_STANICE) {
 						// TODO: odavne se pokrece frame za sefa
 						// ne zaboraviti view.setvisible(false)
+						view.setVisible(false);
+						CentralaView centralaView = new CentralaView(k);
+						CentralaController controller = new CentralaController(centralaView);
 						System.out.println("Prozor za Sefa naplatne stanice je pokrenut");
 					}
 					

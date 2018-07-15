@@ -21,8 +21,10 @@ import javax.swing.table.TableModel;
 
 import controller.CentralaController;
 import javafx.scene.control.Button;
+import models.Korisnik;
 import models.Kvar;
 import models.Racun;
+import models.TipKorisnika;
 
 public class CentralaView extends JFrame {
 
@@ -50,10 +52,12 @@ public class CentralaView extends JFrame {
 	// private TableModel model;
 	private ArrayList<Racun> listaRacuna;
 	private ArrayList<Kvar> listaKvarova;
+	private Korisnik korisnik;
+	private int idStanice;
 
-	public CentralaView() {
+	public CentralaView(Korisnik k) {
 		super("Sistem naplatnih stanica - Operater centrale");
-
+		korisnik = k;
 		listaRacuna = new ArrayList<>();
 		listaKvarova = new ArrayList<>();
 		tableScrollers = new JScrollPane[2];
@@ -142,6 +146,12 @@ public class CentralaView extends JFrame {
 		kvar_panel.add(tableScrollers[1]);
 		kvar_panel.add(kvar_dugmici);
 
+		if(korisnik.getTip() == TipKorisnika.SEF_NAPLATNE_STANICE){
+			dugmeStanicaKvar.setVisible(false);
+			kvarStanica.setVisible(false);
+			labStanica.setVisible(false);
+		}
+		
 	}
 
 	private void initComponents() {
@@ -238,6 +248,12 @@ public class CentralaView extends JFrame {
 				(HEIGHT / 3) / 2 + 2 * (HEIGHT / 3) - visina_dugme / 2);
 		dugmePonisti.setSize(sirina_dugme, visina_dugme);
 
+		if(korisnik.getTip() == TipKorisnika.SEF_NAPLATNE_STANICE){
+			stanica.setVisible(false);
+			labStanica.setVisible(false);
+			dugmeStanica.setVisible(false);
+		}
+		
 		// tableScrollers[0] = new JScrollPane(table[0]);
 		general_panel.add(tableScrollers[0]);
 		general_panel.add(right_panel);
@@ -373,8 +389,8 @@ public class CentralaView extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		CentralaView view = new CentralaView();
-		CentralaController controller = new CentralaController(view);
+		//CentralaView view = new CentralaView();
+		//CentralaController controller = new CentralaController(view);
 	}
 
 	public ArrayList<Kvar> getListaKvarova() {
@@ -383,6 +399,18 @@ public class CentralaView extends JFrame {
 
 	public void setListaKvarova(ArrayList<Kvar> lista){
 		this.listaKvarova = lista;
+	}
+	
+	public Korisnik getSef(){
+		return korisnik;
+	}
+	
+	public void setIdStanice(int id){
+		idStanice = id;
+	}
+	
+	public int getIdStanice(){
+		return idStanice;
 	}
 
 }

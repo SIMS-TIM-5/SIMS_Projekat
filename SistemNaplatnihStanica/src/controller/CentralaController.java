@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import models.Deonica;
+import models.Korisnik;
 import models.Kvar;
 import models.NaplatnaStanica;
 import models.Racun;
 import models.Sistem;
+import models.TipKorisnika;
 import sun.security.x509.IssuingDistributionPointExtension;
 import view.CentralaView;
 import view.RadioListener;
@@ -30,9 +32,15 @@ public class CentralaController {
 		addBtnKvarDatum();
 		addBtnKvarStanica();
 		napuniListu();
+
+		if (view.getSef().getTip() == TipKorisnika.SEF_NAPLATNE_STANICE) {
+			nadjiStanicu(view.getSef());
+			ocistiZaSefa(view.getIdStanice());
+		}
+
 		initTabeleRacuni();
 		initTabeleKvarovi();
-		
+
 		view.setRadioListener(new RadioListener() {
 
 			@Override
@@ -41,6 +49,20 @@ public class CentralaController {
 				System.out.println(s);
 			}
 		});
+	}
+
+	private void ocistiZaSefa(int idStanice) {
+		ArrayList<Racun> pomocniRacuni = new ArrayList<>();
+		for (int i = 0; i < view.getListaRacuna().size(); i++) {
+			if (view.getListaRacuna().get(i).getIdStanice() == idStanice) {
+				pomocniRacuni.add(view.getListaRacuna().get(i));
+			}
+		}
+
+		view.setListaRacuna(pomocniRacuni);
+
+		// za kvarove treba popraviti metode
+
 	}
 
 	private void addBtnDatumListener() {
@@ -61,6 +83,10 @@ public class CentralaController {
 				}
 
 				primeniDatum(datumP, datumK);
+				if(view.getSef().getTip() == TipKorisnika.SEF_NAPLATNE_STANICE){
+					ocistiZaSefa(view.getIdStanice());
+				}
+				
 				initTabeleRacuni();
 
 				System.out.println(view.getDatumP());
@@ -85,9 +111,9 @@ public class CentralaController {
 		});
 	}
 
-	private void addBtnPonistiKvar(){
+	private void addBtnPonistiKvar() {
 		view.setDugmePonistiKvar(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Ponisti kvar");
@@ -100,16 +126,16 @@ public class CentralaController {
 			}
 		});
 	}
-	
-	private void addBtnKvarDatum(){
+
+	private void addBtnKvarDatum() {
 		view.setDugmeDatumKvar(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("datum kvar");
 				Date datumK = null, datumP = null;
 				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy.");
-				
+
 				try {
 					datumK = formatter.parse(view.getKvarDatumK());
 					datumP = formatter.parse(view.getKvarDatumP());
@@ -117,33 +143,33 @@ public class CentralaController {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				primeniDatumKvar(datumP, datumK);
 				initTabeleKvarovi();
 			}
 		});
 	}
-	
+
 	protected void primeniDatumKvar(Date datumP, Date datumK) {
-		// treba izbaciti 
+		// treba izbaciti
 		datumP.setHours(0);
 		datumP.setMinutes(0);
 		datumK.setHours(23);
 		datumK.setMinutes(59);
-		
+
 		ArrayList<Kvar> pomocna = new ArrayList<>();
-		for(int i = 0; i < view.getListaKvarova().size();i++){
-			if(view.getListaKvarova().get(i).getDatum().before(datumK)
-					&& view.getListaKvarova().get(i).getDatum().after(datumP)){
-						pomocna.add(view.getListaKvarova().get(i));
-					}
+		for (int i = 0; i < view.getListaKvarova().size(); i++) {
+			if (view.getListaKvarova().get(i).getDatum().before(datumK)
+					&& view.getListaKvarova().get(i).getDatum().after(datumP)) {
+				pomocna.add(view.getListaKvarova().get(i));
+			}
 		}
 		view.setListaKvarova(pomocna);
 	}
 
-	private void addBtnKvarStanica(){
+	private void addBtnKvarStanica() {
 		view.setDugmeStanicaKvar(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("stanica kvar");
@@ -151,21 +177,21 @@ public class CentralaController {
 				primeniStanicuKvar(view.getKvarStanica());
 				initTabeleKvarovi();
 				System.out.println(view.getListaRacuna().size());
-				
+
 			}
 		});
 	}
-	
+
 	protected void primeniStanicuKvar(String id) {
 		ArrayList<Kvar> pomocna = new ArrayList<>();
-		for(int i = 0; i < view.getListaKvarova().size(); i++){
-			if(view.getListaKvarova().get(i).getIdMesta().equals(id) ){
+		for (int i = 0; i < view.getListaKvarova().size(); i++) {
+			if (view.getListaKvarova().get(i).getIdMesta().equals(id)) {
 				pomocna.add(view.getListaKvarova().get(i));
 			}
 		}
-		
+
 		view.setListaKvarova(pomocna);
-		
+
 	}
 
 	private void addBtnPonistiListener() {
@@ -181,6 +207,9 @@ public class CentralaController {
 				view.setDatumPEmpty();
 				view.ponistiRadioBtn();
 				napuniListu();
+				if (view.getSef().getTip() == TipKorisnika.SEF_NAPLATNE_STANICE) {
+					ocistiZaSefa(view.getIdStanice());
+				}
 				initTabeleRacuni();
 				System.out.println(view.getListaRacuna().size());
 			}
@@ -195,6 +224,16 @@ public class CentralaController {
 		for (int i = 0; i < Sistem.stanice.size(); i++) {
 			for (int j = 0; j < Sistem.stanice.get(i).getRacuni().size(); j++) {
 				view.getListaRacuna().add(Sistem.stanice.get(i).getRacuni().get(j));
+			}
+		}
+	}
+
+	private void nadjiStanicu(Korisnik k) {
+		sistem = sistem.getInstance();
+		for (int i = 0; i < sistem.stanice.size(); i++) {
+			if (sistem.stanice.get(i).getSef().equals(k.getKorisnickoIme())) {
+				view.setIdStanice(sistem.stanice.get(i).getIdStanice());
+				return;
 			}
 		}
 	}
@@ -215,75 +254,75 @@ public class CentralaController {
 		}
 		view.setListaRacuna(pomocna);
 	}
-	
-	private void primeniStanicu(int idStanice){
+
+	private void primeniStanicu(int idStanice) {
 		int pid = idStanice;
 		ArrayList<Racun> pomocna = new ArrayList<>();
-		for(int i = 0; i < view.getListaRacuna().size();i++){
+		for (int i = 0; i < view.getListaRacuna().size(); i++) {
 			System.out.println(view.getListaRacuna().size());
 			int ppid = view.getListaRacuna().get(i).getIdStanice();
-			if(view.getListaRacuna().get(i).getIdStanice() == idStanice){
+			if (view.getListaRacuna().get(i).getIdStanice() == idStanice) {
 				pomocna.add(view.getListaRacuna().get(i));
 			}
 		}
 		view.setListaRacuna(pomocna);
 	}
-	
-	private Object[][] parsirajListuRacuna(ArrayList<Racun> listaRacuna){
+
+	private Object[][] parsirajListuRacuna(ArrayList<Racun> listaRacuna) {
 		ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-		
-		for(Racun r: listaRacuna){
+
+		for (Racun r : listaRacuna) {
 			ArrayList<String> racunS = new ArrayList<String>();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy.");
 			racunS.add(String.valueOf(formatter.format(r.getDatumProlaska())));
 			racunS.add(String.valueOf(r.getTipVozila()));
 			racunS.add(String.valueOf(r.getIdStanice()));
 			racunS.add(String.valueOf(r.getIdDeonice()));
-			
+
 			data.add(racunS);
 		}
-		
+
 		Object[][] podaci = new Object[data.size()][];
 		for (int i = 0; i < data.size(); ++i) {
 			ArrayList<String> row = data.get(i);
 			podaci[i] = row.toArray(new Object[row.size()]);
 		}
-		
+
 		return podaci;
-		
+
 	}
-	
-	private void initTabeleRacuni(){
+
+	private void initTabeleRacuni() {
 		Object[][] data = parsirajListuRacuna(view.getListaRacuna());
-		view.ubaciUTabelu(0,view.colums, data);
+		view.ubaciUTabelu(0, view.colums, data);
 	}
-	
-	private void initTabeleKvarovi(){
+
+	private void initTabeleKvarovi() {
 		Object[][] data = parsirajListuKvarova(view.getListaKvarova());
 		view.ubaciUTabelu(1, view.colums_kvar, data);
 	}
 
 	private Object[][] parsirajListuKvarova(ArrayList<Kvar> listaKvarova) {
-ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-		
-		for(Kvar k: listaKvarova){
+		ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+
+		for (Kvar k : listaKvarova) {
 			ArrayList<String> kvarS = new ArrayList<String>();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy.");
 			kvarS.add(String.valueOf(formatter.format(k.getDatum())));
 			kvarS.add(String.valueOf(k.getIdMesta()));
 			kvarS.add(String.valueOf(k.getTipKvara()));
 			kvarS.add(String.valueOf(k.getOpis()));
-			
+
 			data.add(kvarS);
 		}
-		
+
 		Object[][] podaci = new Object[data.size()][];
 		for (int i = 0; i < data.size(); ++i) {
 			ArrayList<String> row = data.get(i);
 			podaci[i] = row.toArray(new Object[row.size()]);
 		}
-		
+
 		return podaci;
 	}
-	
+
 }
