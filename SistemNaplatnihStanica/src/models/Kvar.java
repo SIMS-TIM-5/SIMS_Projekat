@@ -3,18 +3,26 @@ package models;
 import java.util.Date;
 
 public class Kvar {
+	
+	private static int idCount = 1;
 
 	private TipKvara tipKvara;
 	private String opis;
-	private String idKvara;
+	private int idKvara;
 	private Date datum;
+	private String idMesta;
 	
-	public Kvar(TipKvara tipKvara, String opis, String idKvara, Date datum) {
+	public Kvar() {
+		
+	}
+	
+	public Kvar(TipKvara tipKvara, String opis, Date datum, String idMesta) {
 		super();
 		this.tipKvara = tipKvara;
 		this.opis = opis;
-		this.idKvara = idKvara;
+		this.idKvara = idCount++;
 		this.datum = datum;
+		this.idMesta = idMesta;
 	}
 
 	public TipKvara getTipKvara() {
@@ -33,11 +41,11 @@ public class Kvar {
 		this.opis = opis;
 	}
 
-	public String getIdKvara() {
+	public int getIdKvara() {
 		return idKvara;
 	}
 
-	public void setIdKvara(String idKvara) {
+	public void setIdKvara(int idKvara) {
 		this.idKvara = idKvara;
 	}
 
@@ -48,5 +56,16 @@ public class Kvar {
 	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
+
+	public String getIdMesta() {
+		return idMesta;
+	}
+
+	@Override
+	public String toString() {
+		return "Kvar [tipKvara=" + tipKvara + ", opis=" + opis + ", idKvara=" + idKvara + ", datum=" + datum
+				+ ", idMesta=" + idMesta + "]";
+	}
+
 	
 }

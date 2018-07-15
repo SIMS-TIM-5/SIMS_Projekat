@@ -1,0 +1,115 @@
+package utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import models.Korisnik;
+import models.Kvar;
+import models.NaplatnaStanica;
+import models.RegularnoMesto;
+import models.Sistem;
+
+public class JSONReader {
+
+	/**
+	 * Cita korisnike iz fajla cija putanja se prosledi kao parametar.
+	 */
+	public static ArrayList<Korisnik> procitajKorisnike(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaKorisnika lk = null;
+		
+		try {
+			lk = mapper.readValue(new File(path), ListaKorisnika.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return lk.getKorisnici();
+	}
+	
+	/**
+	 * Cita regularna mesta iz json fajla.
+	 */
+	public static ArrayList<RegularnoMesto> procitajRegularnaMesta(String path, Sistem sistem) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaNaplatnihMesta lnp = null;
+		
+		try {
+			lnp = mapper.readValue(new File(path), ListaNaplatnihMesta.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for (RegularnoMesto rm : lnp.getNaplatnaMesta()) {
+			for (NaplatnaStanica ns : sistem.stanice) {
+				if (rm.getIdStanice() == ns.getIdStanice()) {
+					ns.dodajNaplatnoMesto(rm);
+					break;
+				}
+			}
+		}
+		
+		return lnp.getNaplatnaMesta();
+	}
+
+	/**
+	 * Pomocna klasa za citanje JSON fajla sa korisnicima
+	 */
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaKorisnika {
+		private ArrayList<Korisnik> korisnici;
+		
+		public ListaKorisnika() {
+		}
+
+		public ArrayList<Korisnik> getKorisnici() {
+			return korisnici;
+		}
+	}
+	
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaNaplatnihMesta {
+		private ArrayList<RegularnoMesto> naplatnaMesta;
+		
+		public ListaNaplatnihMesta() {
+		}
+
+		public ArrayList<RegularnoMesto> getNaplatnaMesta() {
+			return naplatnaMesta;
+		}
+	}
+	
+	public static ArrayList<Kvar> procitajKvarovee(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaKvarova lk = null;
+		
+		try {
+			lk = mapper.readValue(new File(path), ListaKvarova.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if (lk.getKvarovi().size() == 0) {
+			return new ArrayList<Kvar>();
+		} else {
+			return lk.getKvarovi();
+		}
+	}
+	
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaKvarova {
+		private ArrayList<Kvar> listaKvarova;
+		
+		public ListaKvarova() {
+		}
+
+		public ArrayList<Kvar> getKvarovi() {
+			return listaKvarova;
+		}
+	}
+}

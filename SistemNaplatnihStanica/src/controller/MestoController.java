@@ -7,14 +7,17 @@ import javax.swing.JOptionPane;
 
 import models.Deonica;
 import models.Korisnik;
+import models.Kvar;
 import models.NaplatnaStanica;
 import models.NaplatnoMesto;
 import models.Racun;
 import models.Sistem;
+import models.TipKvara;
 import models.TipVozila;
 import utils.JSONWriter;
 import view.DeonicaListener;
 import view.DolazakEvent;
+import view.KvarListener;
 import view.NaplatnoMestoView;
 import view.RampaListener;
 
@@ -36,6 +39,7 @@ public class MestoController {
 		
 		setDeonicaListener();
 		setRampaListener();
+		setKvarListener();
 	}
 	
 	public void setDeonicaListener() {
@@ -103,6 +107,19 @@ public class MestoController {
 				Racun r = new Racun(tip, deonica.getId(), mesto.getId(), new Date(), stanica.getIdStanice());
 				stanica.dodajRacun(r);
 				JSONWriter.upisiRacune();
+			}
+			
+		});
+	}
+	
+	public void setKvarListener() {
+		view.getRampaPanel().getDialog().setKvarListener(new KvarListener() {
+
+			@Override
+			public void kvarListenerOccured(TipKvara tip, String opis) {
+				Kvar k = new Kvar(tip, opis, new Date(), mesto.getId());
+				Sistem.getInstance().kvarovi.add(k);
+				JSONWriter.upisiKvarove();
 			}
 			
 		});

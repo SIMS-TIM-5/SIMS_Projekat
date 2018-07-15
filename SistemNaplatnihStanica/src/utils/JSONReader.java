@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Korisnik;
+import models.Kvar;
 import models.NaplatnaStanica;
 import models.RegularnoMesto;
 import models.Sistem;
@@ -80,6 +81,35 @@ public class JSONReader {
 
 		public ArrayList<RegularnoMesto> getNaplatnaMesta() {
 			return naplatnaMesta;
+		}
+	}
+	
+	public static ArrayList<Kvar> procitajKvarovee(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		ListaKvarova lk = null;
+		
+		try {
+			lk = mapper.readValue(new File(path), ListaKvarova.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if (lk.getKvarovi() == null) {
+			return new ArrayList<Kvar>();
+		} else {
+			return lk.getKvarovi();
+		}
+	}
+	
+	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+	static class ListaKvarova {
+		private ArrayList<Kvar> kvarovi;
+		
+		public ListaKvarova() {
+		}
+
+		public ArrayList<Kvar> getKvarovi() {
+			return kvarovi;
 		}
 	}
 }

@@ -13,6 +13,7 @@ public class Sistem {
 	public static ArrayList<Korisnik> korisnici;
 	public static ArrayList<NaplatnaStanica> stanice;
 	public static ArrayList<RegularnoMesto> naplatnaMesta;
+	public static ArrayList<Kvar> kvarovi;
 	
 	public static Sistem getInstance() {
 		if (instance == null) {
@@ -26,6 +27,9 @@ public class Sistem {
 		stanice = JSONReaderStanice.procitajStanice("data/stanice.json", this);
 		naplatnaMesta = JSONReader.procitajRegularnaMesta("data/naplatnaMesta.json", this);
 		JSONReaderRacuni.procitajRacune("data/svi_racuni.json", this);
+		kvarovi = JSONReader.procitajKvarovee("data/kvarovi.json");
+		
+		System.out.println(kvarovi);
 	}
 	
 	public static boolean dodajKorisnika(Korisnik k) {

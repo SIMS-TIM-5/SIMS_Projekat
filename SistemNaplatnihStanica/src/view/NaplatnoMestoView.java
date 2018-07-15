@@ -21,7 +21,7 @@ public class NaplatnoMestoView extends JFrame {
 		
 		toolbar = new Toolbar();
 		deonicaPanel = new DeonicaPanel(stanica);
-		rampaPanel = new RampaPanel();
+		rampaPanel = new RampaPanel(this);
 		
 		setLayout(new BorderLayout());
 		

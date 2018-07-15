@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="models.stanja.rampa.StanjeRampe"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="models.TipVozila"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="javax.swing.SwingUtilities"/>
@@ -16,4 +15,13 @@
 <fullyQualifiedTypeName name="controller.MestoController"/>
 <fullyQualifiedTypeName name="java.awt.Insets"/>
 <fullyQualifiedTypeName name="java.awt.GridBagConstraints"/>
+<fullyQualifiedTypeName name="models.Sistem"/>
+<fullyQualifiedTypeName name="view.DolazakEvent"/>
+<fullyQualifiedTypeName name="view.RampaListener"/>
+<fullyQualifiedTypeName name="models.TipVozila"/>
+<fullyQualifiedTypeName name="models.Racun"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="models.NaplatnaStanica"/>
+<fullyQualifiedTypeName name="utils.JSONWriter"/>
+<fullyQualifiedTypeName name="utils.JSONReaderRacuni"/>
 </qualifiedTypeNameHistroy>

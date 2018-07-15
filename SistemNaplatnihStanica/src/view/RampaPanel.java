@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -18,6 +19,8 @@ import javax.swing.JTextField;
 public class RampaPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	
+	private JFrame parent;
 	
 	private JLabel cenaLabel;
 	private JLabel cenaValLabel;
@@ -34,13 +37,17 @@ public class RampaPanel extends JPanel {
 	private JRadioButton eurValuta;
 	private ButtonGroup valutaGroup;
 	
+	private KvarDialog kvarDialog;
+	
 	private RampaListener rampaListener;
 	
 	
-	public RampaPanel() {
+	public RampaPanel(JFrame parent) {
 		
 		setBorder(BorderFactory.createTitledBorder("Info o rampi"));
 		
+		
+		this.parent = parent;
 		cenaLabel = new JLabel("Cena: ");
 		cenaValLabel = new JLabel("");
 		uplatioLabel = new JLabel("Uplatio: ");
@@ -56,8 +63,7 @@ public class RampaPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("Kvar");
+				kvarDialog.setVisible(true);
 			}
 			
 		});
@@ -91,6 +97,8 @@ public class RampaPanel extends JPanel {
 		valutaGroup = new ButtonGroup();
 		valutaGroup.add(dinValuta);
 		valutaGroup.add(eurValuta);
+		
+		kvarDialog = new KvarDialog(parent);
 		
 		layoutSetup();
 		
@@ -180,5 +188,9 @@ public class RampaPanel extends JPanel {
 	
 	public void resetField() {
 		this.uplatioField.setText("");
+	}
+	
+	public KvarDialog getDialog() {
+		return this.kvarDialog;
 	}
 }

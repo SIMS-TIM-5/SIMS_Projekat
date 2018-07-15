@@ -9,6 +9,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Korisnik;
+import models.Kvar;
 import models.NaplatnaStanica;
 import models.Racun;
 import models.RegularnoMesto;
@@ -76,6 +77,20 @@ public class JSONWriter {
 			mapper.writeValue(new File("data/svi_racuni.json"), map);
 		} catch (IOException e) {
 			System.out.println("Greska prilikom upisa racuna u JSON fajl.");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void upisiKvarove() { 
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Map<String, ArrayList<Kvar>> map = new HashMap<String, ArrayList<Kvar>>();
+		map.put("kvarovi", Sistem.kvarovi);	
+		
+		try {
+			mapper.writeValue(new File("data/kvarovi.json"), map);
+		} catch (IOException e) {
+			System.out.println("Greska prilikom upisa kvarova u JSON fajl.");
 			e.printStackTrace();
 		}
 	}
